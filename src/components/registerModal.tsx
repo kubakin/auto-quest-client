@@ -1,47 +1,57 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
-import React, {FC} from 'react';
+import { Input } from 'antd';
+import React, {FC, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { registerAsync } from '../redux/user/userAsync';
+import Modal from "./modal";
+
 interface IRegisterModal {
   show: boolean,
   handleClose: ()=>void
 }
 const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
-    return (
-        <>
-        <Dialog open={show} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-        <TextField
-            autoFocus
-            margin="dense"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
-        <TextField
-            autoFocus
-            margin="dense"
-            label="Phone number"
-            type="phone"
-            fullWidth
-          />
-        <TextField
-            autoFocus
-            margin="dense"
-            label="Password"
-            type="password"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
-      </Dialog>
-        </>
-    )
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const handleOk = () => {
+    dispatch(registerAsync({email, password}));
+    console.log(login);
+    console.log(password);
+    console.log(email);
+    handleClose();
+  };
+  return (
+    <Modal
+      visible={show}
+      handleClose={handleClose}
+      title="Регистрация"
+      handleOk={handleOk}
+    >
+      <div>
+      {/* <Input
+          placeholder="Login"
+          allowClear
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
+        /> */}
+        <Input
+          placeholder="Email"
+          allowClear
+          value={email}
+          size='large'
+          className='modal-input'
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input.Password
+          placeholder="Password"
+          allowClear
+          size='large'
+          className='modal-input'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+    </Modal>
+  );
 }
 export default RegisterModal;

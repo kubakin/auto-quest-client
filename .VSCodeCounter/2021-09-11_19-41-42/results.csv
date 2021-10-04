@@ -1,0 +1,45 @@
+"filename", "language", "Markdown", "TypeScript React", "JSON", "TypeScript", "HTML", "SCSS", "Log", "comment", "blank", "total"
+"/home/kubakin/quest/client/README.md", "Markdown", 25, 0, 0, 0, 0, 0, 0, 0, 20, 45
+"/home/kubakin/quest/client/debug.log", "Log", 0, 0, 0, 0, 0, 0, 1, 0, 1, 2
+"/home/kubakin/quest/client/package-lock.json", "JSON", 0, 0, 15590, 0, 0, 0, 0, 0, 1, 15591
+"/home/kubakin/quest/client/package.json", "JSON", 0, 0, 76, 0, 0, 0, 0, 0, 1, 77
+"/home/kubakin/quest/client/public/index.html", "HTML", 0, 0, 0, 0, 24, 0, 0, 23, 1, 48
+"/home/kubakin/quest/client/public/manifest.json", "JSON", 0, 0, 25, 0, 0, 0, 0, 0, 1, 26
+"/home/kubakin/quest/client/src/__shared/api.tsx", "TypeScript React", 0, 17, 0, 0, 0, 0, 0, 0, 2, 19
+"/home/kubakin/quest/client/src/__shared/cookie.tsx", "TypeScript React", 0, 3, 0, 0, 0, 0, 0, 0, 2, 5
+"/home/kubakin/quest/client/src/__shared/helpers.ts", "TypeScript", 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"/home/kubakin/quest/client/src/__shared/hooks.ts", "TypeScript", 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"/home/kubakin/quest/client/src/app.tsx", "TypeScript React", 0, 50, 0, 0, 0, 0, 0, 0, 6, 56
+"/home/kubakin/quest/client/src/components/global-component-styles.scss", "SCSS", 0, 0, 0, 0, 0, 23, 0, 0, 1, 24
+"/home/kubakin/quest/client/src/components/loginModal.tsx", "TypeScript React", 0, 48, 0, 0, 0, 0, 0, 1, 1, 50
+"/home/kubakin/quest/client/src/components/modal.tsx", "TypeScript React", 0, 37, 0, 0, 0, 0, 0, 0, 1, 38
+"/home/kubakin/quest/client/src/components/registerModal.tsx", "TypeScript React", 0, 48, 0, 0, 0, 0, 0, 4, 2, 54
+"/home/kubakin/quest/client/src/components/timer.tsx", "TypeScript React", 0, 64, 0, 0, 0, 0, 0, 0, 1, 65
+"/home/kubakin/quest/client/src/context/index.ts", "TypeScript", 0, 0, 0, 8, 0, 0, 0, 0, 0, 8
+"/home/kubakin/quest/client/src/index.scss", "SCSS", 0, 0, 0, 0, 0, 21, 0, 0, 3, 24
+"/home/kubakin/quest/client/src/index.tsx", "TypeScript React", 0, 28, 0, 0, 0, 0, 0, 3, 2, 33
+"/home/kubakin/quest/client/src/pages/AuthPage/index.module.scss", "SCSS", 0, 0, 0, 0, 0, 39, 0, 0, 0, 39
+"/home/kubakin/quest/client/src/pages/AuthPage/index.tsx", "TypeScript React", 0, 24, 0, 0, 0, 0, 0, 0, 0, 24
+"/home/kubakin/quest/client/src/pages/BriefingPage/briefingPage.tsx", "TypeScript React", 0, 45, 0, 0, 0, 0, 0, 0, 2, 47
+"/home/kubakin/quest/client/src/pages/BriefingPage/index.module.scss", "SCSS", 0, 0, 0, 0, 0, 47, 0, 0, 0, 47
+"/home/kubakin/quest/client/src/pages/QuestionPage/components/answerComponent.tsx", "TypeScript React", 0, 18, 0, 0, 0, 0, 0, 0, 1, 19
+"/home/kubakin/quest/client/src/pages/QuestionPage/components/progressComponent.tsx", "TypeScript React", 0, 15, 0, 0, 0, 0, 0, 0, 1, 16
+"/home/kubakin/quest/client/src/pages/QuestionPage/index.module.scss", "SCSS", 0, 0, 0, 0, 0, 8, 0, 0, 0, 8
+"/home/kubakin/quest/client/src/pages/QuestionPage/questionPage.tsx", "TypeScript React", 0, 22, 0, 0, 0, 0, 0, 0, 1, 23
+"/home/kubakin/quest/client/src/pages/TeamPage/components/enterToTeam.tsx", "TypeScript React", 0, 15, 0, 0, 0, 0, 0, 0, 2, 17
+"/home/kubakin/quest/client/src/pages/TeamPage/index.module.scss", "SCSS", 0, 0, 0, 0, 0, 12, 0, 0, 0, 12
+"/home/kubakin/quest/client/src/pages/TeamPage/teamPage.tsx", "TypeScript React", 0, 67, 0, 0, 0, 0, 0, 0, 1, 68
+"/home/kubakin/quest/client/src/react-app-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"/home/kubakin/quest/client/src/redux/game/gameActions.ts", "TypeScript", 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"/home/kubakin/quest/client/src/redux/game/gameAsync.ts", "TypeScript", 0, 0, 0, 11, 0, 0, 0, 0, 1, 12
+"/home/kubakin/quest/client/src/redux/game/gameReducer.ts", "TypeScript", 0, 0, 0, 29, 0, 0, 0, 0, 3, 32
+"/home/kubakin/quest/client/src/redux/store.ts", "TypeScript", 0, 0, 0, 11, 0, 0, 0, 0, 3, 14
+"/home/kubakin/quest/client/src/redux/types.ts", "TypeScript", 0, 0, 0, 4, 0, 0, 0, 0, 0, 4
+"/home/kubakin/quest/client/src/redux/user/userActions.ts", "TypeScript", 0, 0, 0, 29, 0, 0, 0, 0, 1, 30
+"/home/kubakin/quest/client/src/redux/user/userAsync.ts", "TypeScript", 0, 0, 0, 50, 0, 0, 0, 0, 6, 56
+"/home/kubakin/quest/client/src/redux/user/userReducer.ts", "TypeScript", 0, 0, 0, 43, 0, 0, 0, 0, 6, 49
+"/home/kubakin/quest/client/src/serviceWorker.ts", "TypeScript", 0, 0, 0, 102, 0, 0, 0, 31, 14, 147
+"/home/kubakin/quest/client/src/setupTests.ts", "TypeScript", 0, 0, 0, 1, 0, 0, 0, 4, 1, 6
+"/home/kubakin/quest/client/src/types/enums.ts", "TypeScript", 0, 0, 0, 5, 0, 0, 0, 0, 0, 5
+"/home/kubakin/quest/client/tsconfig.json", "JSON", 0, 0, 20, 0, 0, 0, 0, 0, 1, 21
+"Total", "-", 25, 501, 15711, 311, 24, 150, 1, 67, 94, 16884

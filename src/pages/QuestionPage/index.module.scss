@@ -1,0 +1,94 @@
+.questionPage {
+  background-color: #442342;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .answerBottomBlock {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+  input {
+      background-color: #360131;
+      border: 0;
+      padding-left: 15px;
+      width: 100%;
+        color: white;
+        height: 100%;
+        border-top-left-radius: 20px ;
+        border-bottom-left-radius: 20px ;
+    }
+  button {
+      border: 0;
+      background-color: #360131;
+      height: 100%;
+      color:#e06a89;
+      width: 100%;
+      border-top-right-radius: 20px ;
+        border-bottom-right-radius: 20px ;
+  }
+}
+  p {
+    font-family: "BAHNSCHRIFT";
+    src: local("BAHNSCHRIFT"),
+      url("../../__shared/fonts/BAHNSCHRIFT.TTF") format("ttf");
+  }
+  .progressComponent {
+    background-image: url("./media/pryamoug.png");
+    background-size: cover;
+    width: 200px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 13px 25px;
+
+    justify-content: space-between;
+    .time {
+      color: #e06a89;
+      font-size: 12px;
+    }
+    .progress {
+      font-size: 16px;
+      color: white;
+    }
+  }
+
+  .helpBlock {
+    background-image: url("./media/kvadr.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .paragraphBlockHelp {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+    }
+    .time {
+      color: #e06a89;
+    }
+    .help {
+      color: white;
+      font-size: 10px;
+    }
+    img {
+      width: 20px;
+      position: absolute;
+      top: 25px;
+      right: 30px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+  .questComponent {
+    img {
+      width: 300px;
+    }
+  }
+}

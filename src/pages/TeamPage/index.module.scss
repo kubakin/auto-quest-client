@@ -1,0 +1,60 @@
+.teamPage {
+    background-color: #442342;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    & div {
+        padding: 20px;
+        & img {
+            margin-right: 10px;
+        }
+    }
+}
+.enterBlock {
+    & img {
+        height: 40px;
+        width: 40px;
+    }
+    & p {
+        margin: 0;
+        color: #e06a89;
+        font-size: 20px;
+    }
+}
+
+.teamBlock {
+    padding: 40px;
+    height: 200px;
+    background: url('./media/teamWindow.png') 100% 100%;
+    background-size: cover;
+    * {
+    color: #e06a89;
+        
+    }
+    h2 {
+        color: white;
+    }
+    & div {
+        margin-top: 60px;
+        & img {
+            margin-right: 10px;
+        }
+    }
+}
+
+.briefingLink {
+    background-color: #e06a89;
+    display: flex;
+    justify-content: center;
+    a {
+        font-size: 30px;
+        text-align: center;
+        color: white;
+    }
+}

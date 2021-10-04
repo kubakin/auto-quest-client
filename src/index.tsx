@@ -4,26 +4,27 @@ import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 import "moment/locale/ru";
 import AuthContext from "./context";
 import { ModalTypeEnum } from "./types/enums";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 const Main = () => {
   const [modalType, setModalType] = useState<ModalTypeEnum>(ModalTypeEnum.none);
   return (
     <React.StrictMode>
-      <AuthContext.Provider value={{modalType, setModalType}}>
+      <Provider store={store}>
+        <AuthContext.Provider value={{ modalType, setModalType }}>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-      </AuthContext.Provider>
+        </AuthContext.Provider>
+      </Provider>
     </React.StrictMode>
-  )
-}
-ReactDOM.render(
-  <Main />,
-  document.getElementById("root")
-);
+  );
+};
+ReactDOM.render(<Main />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
