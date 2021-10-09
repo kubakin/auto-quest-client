@@ -1,5 +1,4 @@
 .TaskPage {
-
     .taskWithHelps {
         border-bottom: 1px black solid;
     }
@@ -7,8 +6,6 @@
         padding: 5px 20px;
         display: flex;
         flex-direction: row;
-
-
         div {
             width: 300px;
             font-size: 20px;
@@ -16,5 +13,27 @@
     }
 }
 .TaskPage .taskWithHelps:nth-child(2n) {
+    background: white;
+}
+
+%item {
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: row;
+    div {
+        width: 300px;
+        font-size: 20px;
+    }
+}
+.list {
+    .head {
+        @extend %item;
+    }
+    .item {
+        border-bottom: 1px black solid;
+        @extend %item;
+    }
+}
+.list .item:nth-child(2n) {
     background: white;
 }

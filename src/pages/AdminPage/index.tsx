@@ -12,6 +12,7 @@ import TaskPage from "./adminPages/TaskPage";
 import TeamPage from "./adminPages/TeamPage";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import GamePage from "./adminPages/GamePage";
+import TaskInfo from "./adminPages/TaskInfo";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminPage = ({ match }) => {
@@ -45,7 +46,7 @@ const AdminPage = ({ match }) => {
               <Link to={match?.path + "/team"}>Команды</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
-            <Link to={match?.path + "/game"}>Игра</Link>
+              <Link to={match?.path + "/game"}>Игра</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<UserOutlined />}>
               nav 4
@@ -59,7 +60,8 @@ const AdminPage = ({ match }) => {
           />
           <Content className={styles.AdminContent} style={{ margin: "24px 16px 0" }}>
             <Switch>
-              <Route path={match.path + "/tasks"} component={TaskPage} />
+              <Route path={match.path + "/tasks"} component={TaskPage} exact />
+              <Route path={match.path + "/tasks/:id"} component={TaskInfo} />
               <Route path={match.path + "/team"} component={TeamPage} />
               <Route path={match.path + "/game"} component={GamePage} />
             </Switch>
