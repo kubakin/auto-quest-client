@@ -1,14 +1,20 @@
 .TaskPage {
+
     .taskWithHelps {
         border-bottom: 1px black solid;
-        margin-bottom: 20px;
     }
     .taskRow {
+        padding: 5px 20px;
         display: flex;
         flex-direction: row;
+
+
         div {
             width: 300px;
             font-size: 20px;
         }
     }
+}
+.TaskPage .taskWithHelps:nth-child(2n) {
+    background: white;
 }

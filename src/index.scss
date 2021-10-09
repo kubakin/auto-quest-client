@@ -20,4 +20,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.AdminPage {
+  * {
+    font-family: "Times New Roman"!important;
+  }
+}
 @import url('components/global-component-styles.scss');

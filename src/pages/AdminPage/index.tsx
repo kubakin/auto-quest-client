@@ -20,7 +20,7 @@ const AdminPage = ({ match }) => {
 
   return (
     <div className={styles.AdminPage}>
-      <Layout>
+      <Layout className={styles.minHeight100}>
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
@@ -57,7 +57,7 @@ const AdminPage = ({ match }) => {
             className="site-layout-sub-header-background"
             style={{ padding: 0 }}
           />
-          <Content style={{ margin: "24px 16px 0" }}>
+          <Content className={styles.AdminContent} style={{ margin: "24px 16px 0" }}>
             <Switch>
               <Route path={match.path + "/tasks"} component={TaskPage} />
               <Route path={match.path + "/team"} component={TeamPage} />
