@@ -44,18 +44,38 @@ const TaskInfo = () => {
         setIsModalVisible(false);
     }
     return (
-        <>
+        <div>
+            <div className={styles.taskInfo}>
+                <div className={styles.row}>
+                    <div>
+                        Задание:
+                    </div>
+                    <p>
+                        {taskInfo?.text}
+                    </p>
+                </div>
+                <div className={styles.row}>
+                    <div>
+                        Ответ:
+                    </div>
+                    <p>
+                        {taskInfo?.answer}
+                    </p>
+                </div>
+            </div>
             <Button type="primary" onClick={showModal}>
                 Создать подсказку
             </Button>
             <div className={styles.list}>
                 <div className={styles.head}>
+                    <div>id</div>
                     <div>Текст</div>
                     <div>Цена</div>
                 </div>
                 {taskInfo && (
                     (taskInfo.helps as iHelp[]).map((item: iHelp) => (
                         <div className={styles.item} key={item.id}>
+                            <div>{item.id}</div>
                             <div>{item.text}</div>
                             <div>{item.price}</div>
                         </div>
@@ -68,7 +88,7 @@ const TaskInfo = () => {
                     <Input value={text} onChange={(e) => setText(e.target.value)} />
                 </Modal>
             </>
-        </>
+        </div>
     );
 };
 export default TaskInfo;
