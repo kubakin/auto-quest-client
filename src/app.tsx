@@ -30,9 +30,9 @@ const App: FC = () => {
   }, [dispatch, token]);
 
   useEffect(() => {
-    // if(!user || history.location.pathname === '/') {
-    //   history.push('/auth');
-    // }
+    if(!user || history.location.pathname === '/') {
+      history.push('/auth');
+    }
     if((user && history.location.pathname === '/auth')) {
       history.push('/team');
     }
