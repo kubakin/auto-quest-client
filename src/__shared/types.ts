@@ -2,7 +2,7 @@ export interface iTask {
   id: number;
   text: string;
   teams: any;
-  helps: iHelp[];
+  helps: iHelp[] | [];
   answer: string;
   price: number;
   file: string;
@@ -10,8 +10,10 @@ export interface iTask {
 };
 
 export interface iHelp {
+  id: number;
   task_id: number;
   text: string;
+  price: number;
 };
 
 

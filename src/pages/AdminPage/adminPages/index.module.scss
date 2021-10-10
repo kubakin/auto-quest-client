@@ -1,14 +1,12 @@
 .TaskPage {
-
     .taskWithHelps {
         border-bottom: 1px black solid;
+        cursor: pointer;
     }
     .taskRow {
         padding: 5px 20px;
         display: flex;
         flex-direction: row;
-
-
         div {
             width: 300px;
             font-size: 20px;
@@ -17,4 +15,42 @@
 }
 .TaskPage .taskWithHelps:nth-child(2n) {
     background: white;
+}
+
+%item {
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: row;
+    div {
+        width: 200px;
+        font-size: 20px;
+    }
+}
+.list {
+    .head {
+        @extend %item;
+    }
+    .item {
+        border-bottom: 1px black solid;
+        @extend %item;
+    }
+}
+.list .item:nth-child(2n) {
+    background: white;
+}
+.taskInfo {
+    padding: 5px 20px;
+    font-size: 25px;
+    margin-bottom: 30px;
+    .row {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px black solid;
+        div {
+            width: 110px;
+        }
+        p {
+            margin: 0;
+        }
+    }
 }

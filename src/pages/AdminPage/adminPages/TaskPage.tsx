@@ -1,9 +1,15 @@
-import {Button, Input, Modal, Upload} from "antd";
-import React, {useEffect, useState} from "react";
+import { Button, Input, Modal, Upload } from "antd";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import API from "../../../__shared/api";
 import styles from "./index.module.scss";
 
+interface DataI<T> {
+    data: T
+}
+
 const TaskPage = () => {
+    const history = useHistory();
     const [tasks, setTasks] = useState<any>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [text, setText] = useState('');
@@ -13,10 +19,9 @@ const TaskPage = () => {
         setIsModalVisible(true);
     };
 
-    interface DataI<Int> {
-        data: Int
+    function handleClick() {
+        history.push("/home");
     }
-
     const handleOk = () => {
         setIsModalVisible(false);
     };
@@ -50,14 +55,16 @@ const TaskPage = () => {
             </Button>
             <div className={styles.TaskPage}>
                 <div className={styles.taskRow}>
+                    <div>id</div>
                     <div>Текст</div>
                     <div>Ответ</div>
                 </div>
                 {tasks?.length > 0 ? (
                     tasks.map((item: any) => {
                         return (
-                            <div className={styles.taskWithHelps}>
+                            <div className={styles.taskWithHelps} onClick={() => history.push(`/admin/tasks/${item.id}`)}>
                                 <div className={styles.taskRow}>
+                                    <div>{item.id}</div>
                                     <div>{item.text}</div>
                                     <div>{item.answer}</div>
                                 </div>
@@ -81,10 +88,12 @@ const TaskPage = () => {
             <>
 
                 <Modal title="Basic Modal" visible={isModalVisible} onOk={postTask} onCancel={handleCancel}>
-                    <p>Some contents...</p>
-                    <Input value={text} onChange={(e) => setText(e.target.value)}/>
-                    <Input value={answer} onChange={(e) => setAnswer(e.target.value)}/>
-                    <input type="file" onChange={(e) => setFiles(e.target.files)} name="" id=""/>
+                    <span>Текст задания:</span>
+                    <Input value={text} onChange={(e) => setText(e.target.value)} />
+                    <span>Ответ:</span>
+                    <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
+                    <span>Файл:</span>
+                    <input type="file" onChange={(e) => setFiles(e.target.files)} name="" id="" />
                 </Modal>
             </>
         </>
