@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "crunch": "react-scripts start",
-    "start": "node server.js",
-    "start:dev": "react-scripts start",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "start:dev": "cross-env NODE_ENV=development react-scripts start",
     "start:dev-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -73,6 +73,7 @@
   },
   "devDependencies": {
     "@types/react-howler": "^3.7.2",
+    "cross-env": "^7.0.3",
     "prettier": "2.0.5",
     "typescript": "^3.9.3"
   }

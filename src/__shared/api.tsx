@@ -1,6 +1,6 @@
 import axios from "axios";
 import cookies from "./cookie";
-export const baseURL = 'http://localhost:8000';
+export const baseURL = process.env.BASE_URL || 'https://lit-taiga-15524.herokuapp.com';
 const API = axios.create({
   baseURL,
   responseType: "json",
