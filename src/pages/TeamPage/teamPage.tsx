@@ -5,7 +5,7 @@ import EnterTeam from "./components/enterToTeam";
 import styles from "./index.module.scss";
 import Modal from "../../components/modal";
 import { useDispatch } from "react-redux";
-import { createTeamAsync, enterToTeamAsync } from "../../redux/user/userAsync";
+import { createTeamAsync, enterToTeamAsync, leaveTeamAsync } from '../../redux/user/userAsync';
 import { useTypedSelector } from "../../__shared/hooks";
 import { getCurrentTaskAsync } from "../../redux/game/gameAsync";
 import plus from "./media/plus.png";
@@ -44,7 +44,7 @@ const TeamPage: FC = () => {
             <img alt="plus" src={plus} />
             <p>Создать команду</p>
           </Row>
-        </div> : <TeamBlock team={user.user?.team}/>}
+        </div> : <TeamBlock leaveTeam={()=>dispatch(leaveTeamAsync())} team={user.user?.team}/>}
         
         
 
@@ -67,7 +67,7 @@ const TeamPage: FC = () => {
         handleOk={() => createTeam()}
         handleClose={() => setCreateModal(false)}
       >
-        <EnterTeam value={name} changeHandler={(name) => setName(name)} />
+        <EnterTeam value={name}  changeHandler={(name) => setName(name)} />
       </Modal>
     </>
   );

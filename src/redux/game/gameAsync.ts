@@ -1,7 +1,7 @@
 import { RootState } from "./../store";
 import moment from "moment";
 import API from "../../__shared/api";
-import { getGame, getHelp, getQuest, showModal } from "./gameActions";
+import { getGame, getHelp, getQuest, getTopTeams, showModal } from './gameActions';
 import { iState } from "./gameReducer";
 import { meAsync } from "../user/userAsync";
 import { updateTeam } from "../user/userActions";
@@ -47,3 +47,12 @@ export const getHelpAsync = () => {
     return store;
   };
 };
+
+export const getTopTeamAsync = () => {
+  return (dispatch:any) => {
+    return API.get('/team/top')
+        .then(data=> {
+          dispatch(getTopTeams(data.data));
+        })
+  }
+}

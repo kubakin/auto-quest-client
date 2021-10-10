@@ -2,7 +2,7 @@ import { Row } from "antd";
 import React from "react";
 import styles from "../index.module.scss";
 import exit from "../media/exit.png";
-const TeamBlock = ({team}) => {
+const TeamBlock = ({team, leaveTeam}) => {
   return (
     <>
       <div className={styles.teamBlock}>
@@ -10,11 +10,11 @@ const TeamBlock = ({team}) => {
         <p>Прогресс : {team?.progress}</p>
         <p>Очков : {team?.score}</p>
         <Row
-          onClick={() => console.log(true)}
+          onClick={() => leaveTeam()}
           className={styles.enterBlock}
           align="middle"
         >
-          <img alt="plus" src={exit} />
+          <img onClick={() => leaveTeam()} alt="plus" src={exit} />
           <p>Покинуть команду</p>
         </Row>
       </div>

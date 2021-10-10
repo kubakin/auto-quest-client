@@ -13,3 +13,14 @@ export interface iHelp {
   task_id: number;
   text: string;
 };
+
+
+export interface iTeam {
+  helpstatus: number;
+  id: number;
+  name: string;
+  next_answer: Date;
+  progress: number;
+  status: string;
+  score: number;
+}

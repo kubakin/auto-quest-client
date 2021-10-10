@@ -42,8 +42,7 @@ const QuestionPage = () => {
   }
 
   })
-
-  return (
+  return team ? (
     <div className={styles.questionPage}>
       <Row justify="space-around">
         <Col onClick={getHelp}>
@@ -54,7 +53,7 @@ const QuestionPage = () => {
         </Col>
       </Row>
       <Row className={styles.questComponent} justify="center">
-        <Col><img alt='' src={`http://localhost:5000/${quest.quest.file}`}/></Col>
+        <Col><img alt='' src={`http://localhost:5000/${quest?.quest?.file}`}/></Col>
         <Col>{quest.quest.text}</Col>
       </Row>
       <Row className={styles.answerBottomBlock} justify="center">
@@ -62,6 +61,6 @@ const QuestionPage = () => {
         <Col span={8}><Button onClick={()=>dispatch(toAnswerAsync(answer))}>Отправить</Button></Col>
       </Row>
     </div>
-  );
+  ): <></>;
 };
 export default QuestionPage;

@@ -5,6 +5,7 @@ const QUEST = 'QUEST';
 const HELP = 'HELP';
 const SHOW_MODAL = 'SHOW_MODAL';
 const HIDE_MODAL = 'HIDE_MODAL';
+const TOP_TEAM = 'TOP_TEAM';
 
 const getGame = (data:any):ActionInterface => {
     return {
@@ -40,6 +41,13 @@ const hideModal = ():ActionInterface => {
     }
 }
 
+const getTopTeams = (teams):ActionInterface => {
+    return {
+        type: TOP_TEAM,
+        payload: teams
+    }
+}
+
 export {
     GAME,
     getGame,
@@ -50,5 +58,7 @@ export {
     SHOW_MODAL,
     HIDE_MODAL,
     showModal,
-    hideModal
+    hideModal,
+    TOP_TEAM,
+    getTopTeams,
 }

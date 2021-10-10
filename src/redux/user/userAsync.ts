@@ -1,6 +1,6 @@
 import { getGameAsync } from './../game/gameAsync';
 import API from "../../__shared/api";
-import { login, me } from "./userActions";
+import { login, me, updateTeam } from './userActions';
 
 export const meAsync = (): any => {
   return (dispatch:any) => {
@@ -14,7 +14,7 @@ export const meAsync = (): any => {
 export const enterToTeamAsync = (name: string):any => {
   return (dispatch: any) => {
     API.post('/team/enter', {name})
-    .then(data=>console.log(data.data))
+    .then(data=>updateTeam(data.data))
   }
 }
 
@@ -46,11 +46,21 @@ export const registerAsync = (registerData:any): any=> {
   }
 }
 
+export const leaveTeamAsync = () => {
+  return (dispatch: any) => {
+    console.log('hey')
+    API.post('/team/leave')
+        .then(data=> {
+          dispatch(updateTeam(null));
+        })
+  }
+}
+
 export const createTeamAsync = (name:any): any=> {
   return (dispatch:any) => {
     API.post('/team', {name})
     .then(data=> {
-      console.log(data.data)
+      dispatch(updateTeam(data.data));
     })
   }
 }
