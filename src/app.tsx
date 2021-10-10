@@ -34,7 +34,7 @@ const App: FC = () => {
     //   history.push('/auth');
     // }
     if((user && history.location.pathname === '/auth')) {
-      history.push('/team');
+      // history.push('/team');
     }
   }, [history, user]);
 

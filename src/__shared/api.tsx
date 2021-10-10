@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookies from "./cookie";
 const API = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://moody-dragonfly-33.loca.lt",
   responseType: "json",
 });
 
