@@ -1,6 +1,6 @@
 import { Button, Input, Modal, Upload } from "antd";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, withRouter } from 'react-router-dom';
 import API from "../../../__shared/api";
 import styles from "./index.module.scss";
 
@@ -99,4 +99,4 @@ const TaskPage = () => {
         </>
     );
 };
-export default TaskPage;
+export default withRouter(TaskPage);

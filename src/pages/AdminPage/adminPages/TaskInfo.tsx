@@ -1,9 +1,10 @@
-import { Button, Input, Modal, Upload } from "antd";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import API from "../../../__shared/api";
-import { iHelp, iTask } from "../../../__shared/types";
-import styles from "./index.module.scss";
+import { Button, Input, Modal, Upload } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import API from '../../../__shared/api';
+import { iHelp, iTask } from '../../../__shared/types';
+import styles from './index.module.scss';
+import FileType from '../../../components/fileType';
 
 interface RouterParams {
     id: string;
@@ -13,13 +14,14 @@ interface iHelpForm {
     task_id: number;
     text: string;
 }
+
 interface DataI<T> {
-    data: T
+    data: T;
 }
 
 const TaskInfo = () => {
     const routerParams = useParams<RouterParams>();
-
+    console.log(routerParams);
     const [taskInfo, setTaskInfo] = useState<iTask>();
     const [help, setTHelp] = useState<iHelp[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,18 +34,19 @@ const TaskInfo = () => {
         API.get(`/task/${routerParams.id}`).then((data) => {
             setTaskInfo(data.data);
         });
-    });
+    }, []);
 
     const postTask = () => {
         if (!text) return;
-        const form: iHelpForm = { task_id: Number(routerParams.id), text: text };
+        const form: iHelpForm = {task_id: Number(routerParams.id), text: text};
         API.post('/help', form)
             .then((data: DataI<iHelp>) => setTaskInfo(prev => {
-                return prev ? { ...prev, helps: [...(prev.helps), data.data] } : undefined;
-            }))
+                return prev ? {...prev, helps: [...(prev.helps), data.data]} : undefined;
+            }));
         setIsModalVisible(false);
-    }
+    };
     return (
+        taskInfo ? (
         <div>
             <div className={styles.taskInfo}>
                 <div className={styles.row}>
@@ -61,6 +64,9 @@ const TaskInfo = () => {
                     <p>
                         {taskInfo?.answer}
                     </p>
+                </div>
+                <div className={styles.row}>
+                    <FileType task={taskInfo}/>
                 </div>
             </div>
             <Button type="primary" onClick={showModal}>
@@ -85,10 +91,11 @@ const TaskInfo = () => {
             <>
                 <Modal title="Создание новой подсказки" visible={isModalVisible} onOk={postTask} onCancel={hideModal}>
                     <p>Текст подсказки:</p>
-                    <Input value={text} onChange={(e) => setText(e.target.value)} />
+                    <Input value={text} onChange={(e) => setText(e.target.value)}/>
                 </Modal>
             </>
         </div>
+        ) : <></>
     );
 };
 export default TaskInfo;
