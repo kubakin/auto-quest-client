@@ -1,21 +1,22 @@
-import { ActionInterface } from './../types';
-import { GAME, HELP, HIDE_MODAL, QUEST, SHOW_MODAL, TOP_TEAM } from './gameActions';
+import { ActionInterface } from '../../__shared/types';
+import { GAME, HELP, HIDE_MODAL, QUEST, SHOW_MODAL, TOP_TEAM, ADD_MSG } from './gameActions';
 import { iTeam } from '../../__shared/types';
 import { transformStatus } from '../../__shared/helpers';
 
-interface TimeRane {
+interface TimeRange {
     start: Date,
     end: Date
 }
 
 export interface iState {
-    range: TimeRane;
+    range: TimeRange;
     quest: any;
     totalTasks: 0,
     help: any;
     modal: boolean,
     textModal: string,
-    topTeams: iTeam[]
+    topTeams: iTeam[],
+    chat: String[],
 }
 
 const initState: iState = {
@@ -29,6 +30,8 @@ const initState: iState = {
     modal: false,
     textModal: '',
     topTeams: [],
+    chat: ['qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty',
+    ],
 };
 
 const gameReducer = (state: iState = initState, actions: ActionInterface): iState => {
@@ -36,7 +39,7 @@ const gameReducer = (state: iState = initState, actions: ActionInterface): iStat
         case GAME:
             return {
                 ...state,
-                range: {start: actions.payload.game.start, end: actions.payload.game.end},
+                range: {start: actions.payload.start, end: actions.payload.end},
                 totalTasks: actions.payload.totalTasks
             };
         case QUEST:
@@ -61,6 +64,12 @@ const gameReducer = (state: iState = initState, actions: ActionInterface): iStat
                 modal: false,
                 textModal: ''
             };
+
+        case ADD_MSG:
+            return {
+                ...state,
+                chat: [...state.chat, actions.payload]
+            }
         case TOP_TEAM:
             console.log(actions.payload);
             const topTeams = actions.payload.map(team=>{
@@ -73,6 +82,7 @@ const gameReducer = (state: iState = initState, actions: ActionInterface): iStat
                 ...state,
                 topTeams
             };
+
         default:
             return {
                 ...state

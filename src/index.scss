@@ -26,4 +26,22 @@ code {
     font-family: "Times New Roman"!important;
   }
 }
+.spinner-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $darkPink;
+}
+input:focus {
+  border: none;
+  outline: none;
+}
 @import url('components/global-component-styles.scss');
+
+* {
+  font-family: "BAHNSCHRIFT";
+  src: local("BAHNSCHRIFT"),
+  url("__shared/fonts/BAHNSCHRIFT.TTF") format("ttf");
+}

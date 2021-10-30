@@ -1,10 +1,7 @@
 import { RootState } from "./../store";
-import moment from "moment";
 import API from "../../__shared/api";
-import { getGame, getHelp, getQuest, getTopTeams, showModal } from './gameActions';
-import { iState } from "./gameReducer";
-import { meAsync } from "../user/userAsync";
-import { updateTeam } from "../user/userActions";
+import { getGame, getHelp, getTopTeams, showModal } from './gameActions';
+import { meAsyncGlobal } from '../user/userAsync';
 
 export const getGameAsync = () => {
   return (dispatch: any) => {
@@ -14,35 +11,22 @@ export const getGameAsync = () => {
   };
 };
 
-export const getCurrentTaskAsync = () => {
-  return (dispatch: any) => {
-    API.get("/team/task").then((data) => {
-      console.log(data.data);
-      dispatch(getQuest(data.data));
-    }).catch((err)=>dispatch(showModal(err.response.data.message)));
-  };
-};
 
 export const toAnswerAsync = (answer: string) => {
   return (dispatch: any) => {
-    return API.post("/team/answer", { answer }).then((data) => {
-      dispatch(getQuest(data.data.currentTask));
-      dispatch(updateTeam(data.data.team));
-    }).catch((err)=>dispatch(showModal(err.response.data.message)));
+    return API.post("/task/answer", { answer }).then((data) => {
+      dispatch(meAsyncGlobal());
+    })
   };
 };
 
 export const getHelpAsync = () => {
   return async function (dispatch: any, getStore): Promise<RootState> {
-    await API.get("/team/help").then((data) => {
-      // console.log(data.data);
-
+    await API.get("/help").then((data) => {
       dispatch(getHelp(data.data));
-      dispatch(showModal(data.data.help.text))
-      dispatch(meAsync());
-      // dispatch(getQuest(data.data));
-    }).catch((err)=>dispatch(showModal(err.response.data.message)));
-    
+      dispatch(showModal(data.data.text))
+      dispatch(meAsyncGlobal());
+    })
     const store = getStore();
     return store;
   };

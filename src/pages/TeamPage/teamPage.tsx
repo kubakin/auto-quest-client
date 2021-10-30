@@ -1,4 +1,4 @@
-import { Button, Row } from "antd";
+import {  Row } from "antd";
 import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import EnterTeam from "./components/enterToTeam";
@@ -7,7 +7,6 @@ import Modal from "../../components/modal";
 import { useDispatch } from "react-redux";
 import { createTeamAsync, enterToTeamAsync, leaveTeamAsync } from '../../redux/user/userAsync';
 import { useTypedSelector } from "../../__shared/hooks";
-import { getCurrentTaskAsync } from "../../redux/game/gameAsync";
 import plus from "./media/plus.png";
 import TeamBlock from "./components/teamBlock";
 const TeamPage: FC = () => {

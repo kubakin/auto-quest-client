@@ -1,12 +1,30 @@
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
+}
+
+export enum FileType {
+  AUDIO = 'audio',
+  IMAGE = 'image',
+  NO_FILE = 'noFile',
+}
+
+export enum Status  {
+  PROGRESS = 'IN_PROGRESS',
+  FINISHED = 'FINISHED',
+  ACTIVATED  = 'ACTIVATED',
+  NOT_ACTIVATED = 'NOT_ACTIVATED',
+}
+
+
 export interface iTask {
   id: number;
   text: string;
-  teams: any;
-  helps: iHelp[] | [];
   answer: string;
   price: number;
   file: string;
-  fileType: string;
+  fileType: FileType;
+  helps: iHelp[]
 };
 
 export interface iHelp {
@@ -16,13 +34,35 @@ export interface iHelp {
   price: number;
 };
 
+interface iTaskForTeam {
+  id: number;
+  task: iTask;
+  next_help: Date;
+  help_status: number;
+}
 
 export interface iTeam {
-  helpstatus: number;
   id: number;
   name: string;
-  next_answer: Date;
   progress: number;
-  status: string;
+  status: Status;
   score: number;
+  currentTask: iTaskForTeam;
+};
+
+export interface iUser {
+  email: string;
+  id: number;
+  role: Role;
+  team: iTeam | null;
+  username: string;
+  password: string;
 }
+
+
+export interface ActionInterface {
+  payload?: any,
+  type: string
+};
+
+

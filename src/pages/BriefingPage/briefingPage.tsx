@@ -1,5 +1,4 @@
-import { Button } from "antd";
-import React, { MouseEvent, MouseEventHandler, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Timer from "../../components/timer";

@@ -1,6 +1,5 @@
 import React, { ReactChild } from "react";
-import { Button, Col, Layout, Row } from "antd";
-import { Content, Footer, Header } from "antd/lib/layout/layout";
+import { Row } from "antd";
 import logoCar from "../pages/AuthPage/media/logo-car.png";
 interface IModalComponent {
   visible: boolean;

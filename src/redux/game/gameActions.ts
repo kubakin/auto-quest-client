@@ -1,4 +1,4 @@
-import { ActionInterface } from './../types';
+import { ActionInterface } from '../../__shared/types';
 
 const GAME = 'GAME';
 const QUEST = 'QUEST';
@@ -6,6 +6,7 @@ const HELP = 'HELP';
 const SHOW_MODAL = 'SHOW_MODAL';
 const HIDE_MODAL = 'HIDE_MODAL';
 const TOP_TEAM = 'TOP_TEAM';
+const ADD_MSG = 'ADD_MSG'
 
 const getGame = (data:any):ActionInterface => {
     return {
@@ -48,6 +49,13 @@ const getTopTeams = (teams):ActionInterface => {
     }
 }
 
+const addMsg = (msg):ActionInterface => {
+    return {
+        type: ADD_MSG,
+        payload: msg
+    }
+}
+
 export {
     GAME,
     getGame,
@@ -61,4 +69,6 @@ export {
     hideModal,
     TOP_TEAM,
     getTopTeams,
+    addMsg,
+    ADD_MSG
 }

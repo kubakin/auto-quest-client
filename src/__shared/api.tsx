@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from 'axios';
 import cookies from "./cookie";
-export const baseURL = process.env.BASE_URL || 'https://lit-taiga-15524.herokuapp.com';
+import { message } from 'antd';
+import { Simulate } from 'react-dom/test-utils';
+export const baseURL = 'http://localhost:8000' || 'https://lit-taiga-15524.herokuapp.com';
 const API = axios.create({
   baseURL,
   responseType: "json",
@@ -14,7 +16,22 @@ API.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+      return Promise.reject(error)
+  }
 );
+
+API.interceptors.response.use(
+    (config) => {
+        return config;
+
+    },
+    async (error:AxiosError) => {
+        if (error.response?.status !== 401) {
+            message.error(error?.response?.data.message)
+        }
+        return Promise.reject(error)
+    }
+)
 
 export default API;

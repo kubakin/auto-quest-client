@@ -1,66 +1,78 @@
 import { getGameAsync } from './../game/gameAsync';
-import API from "../../__shared/api";
-import { login, me, updateTeam } from './userActions';
+import API from '../../__shared/api';
+import { login, me, updateTeam, userLoaded } from './userActions';
+import { AxiosResponse } from 'axios';
+import { iTeam, iUser } from '../../__shared/types';
+import server from '../../__shared/socket';
+import { message } from 'antd';
 
 export const meAsync = (): any => {
-  return (dispatch:any) => {
-    API.get("/users/me").then((data) => {
-      dispatch(me(data.data));
-      dispatch(getGameAsync());
-    });
-  };
+    return (dispatch: any) => {
+        API.get('/auth/me').then((data: AxiosResponse<iUser>) => {
+            dispatch(me(data.data));
+            dispatch(getGameAsync());
+            dispatch(userLoaded());
+        }).catch(err => {
+            dispatch(userLoaded());
+        });
+    };
 };
 
-export const enterToTeamAsync = (name: string):any => {
-  return (dispatch: any) => {
-    API.post('/team/enter', {name})
-    .then(data=>updateTeam(data.data))
-  }
-}
+export const meAsyncGlobal = (): any => {
+    return (dispatch: any) => {
+        API.get('/auth/me').then((data: AxiosResponse<iUser>) => {
+            dispatch(me(data.data));
+            dispatch(getGameAsync());
+            dispatch(userLoaded());
+            server.emit('next', data.data.team?.name)
+        }).catch(err => {
+            dispatch(userLoaded());
+        });
+    };
+};
 
-export const createTeam = (name:string):any => {
-  return (dispatch:any)=> {
-    API.post('/team', {name})
-    .then(data=>console.log(data.data))
-  }
-}
+export const enterToTeamAsync = (name: string): any => {
+    return (dispatch: any) => {
+        API.post('/user/team/enter', {name})
+            .then((data:AxiosResponse<iUser>) => dispatch(me(data.data)));
+    };
+};
 
-export const loginAsync = (loginData:any): any=> {
-  return (dispatch:any) => {
-    API.post('/auth/login', loginData)
-    .then(data=>{
-      dispatch(login(data.data))
-      dispatch(meAsync());
-    })
-  }
-}
 
-export const registerAsync = (registerData:any): any=> {
-  return (dispatch:any) => {
-    API.post('/auth/register', registerData)
-    .then(data=>{
-      console.log(data.data)
-      dispatch(login(data.data))
-      dispatch(meAsync());
-    })
-  }
-}
+export const loginAsync = (loginData: any): any => {
+    return async (dispatch: any) => {
+        API.post('/auth/login', loginData)
+            .then(data => {
+                dispatch(login(data.data));
+                dispatch(meAsync());
+            })
+    };
+};
+
+export const registerAsync = (registerData: any): any => {
+    return async (dispatch: any) => {
+        API.post('/auth/register', registerData)
+            .then(data => {
+                dispatch(login(data.data));
+                dispatch(meAsync());
+            })
+    };
+};
 
 export const leaveTeamAsync = () => {
-  return (dispatch: any) => {
-    console.log('hey')
-    API.post('/team/leave')
-        .then(data=> {
-          dispatch(updateTeam(null));
-        })
-  }
-}
+    return (dispatch: any) => {
+        API.post('/user/team/leave')
+            .then((data:AxiosResponse<iUser>) => {
+                dispatch(me(data.data));
+            });
+    };
+};
 
-export const createTeamAsync = (name:any): any=> {
-  return (dispatch:any) => {
-    API.post('/team', {name})
-    .then(data=> {
-      dispatch(updateTeam(data.data));
-    })
-  }
-}
+export const createTeamAsync = (name: any): any => {
+    return (dispatch: any) => {
+        API.post('/team', {name})
+            .then(data => {
+                dispatch(me(data.data));
+            });
+    };
+};

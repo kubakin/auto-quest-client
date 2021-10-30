@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Upload } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../../../__shared/api';
@@ -21,9 +21,7 @@ interface DataI<T> {
 
 const TaskInfo = () => {
     const routerParams = useParams<RouterParams>();
-    console.log(routerParams);
     const [taskInfo, setTaskInfo] = useState<iTask>();
-    const [help, setTHelp] = useState<iHelp[]>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [text, setText] = useState('');
 
@@ -34,7 +32,7 @@ const TaskInfo = () => {
         API.get(`/task/${routerParams.id}`).then((data) => {
             setTaskInfo(data.data);
         });
-    }, []);
+    }, [routerParams]);
 
     const postTask = () => {
         if (!text) return;

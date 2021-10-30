@@ -9,15 +9,11 @@ interface IRegisterModal {
   handleClose: ()=>void
 }
 const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
-  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const dispatch = useDispatch();
   const handleOk = () => {
-    dispatch(registerAsync({email, password}));
-    console.log(login);
-    console.log(password);
-    console.log(email);
+    dispatch(registerAsync({username, password}));
     handleClose();
   };
   return (
@@ -37,10 +33,12 @@ const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
         <Input
           placeholder="Email"
           allowClear
-          value={email}
+          autoComplete={'false'}
+          aria-autocomplete={'none'}
+          value={username}
           size='large'
           className='modal-input'
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <Input.Password
           placeholder="Password"

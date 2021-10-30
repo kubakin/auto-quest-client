@@ -5,7 +5,7 @@ import userReducer from "./user/userReducer";
 
 const rootReducer = combineReducers({
     user: userReducer,
-    game: gameReducer
+    game: gameReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

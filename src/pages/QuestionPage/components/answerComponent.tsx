@@ -1,4 +1,3 @@
-import { Col, Row } from "antd";
 import React, { FC } from "react";
 import clockRed from '../media/clockRed.png';
 import clockGreen from '../media/clockGreen.png';

@@ -1,25 +1,18 @@
 import { Input } from "antd";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import { loginAsync } from "../redux/user/userAsync";
-import API from "../__shared/api";
-import cookies from "../__shared/cookie";
 import Modal from "./modal";
 interface ILoginModal {
   show: boolean;
   handleClose: () => void;
 }
 const LoginModal: FC<ILoginModal> = ({ show, handleClose }) => {
-  const [login, setLogin] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
   const handleOk = () => {
-    dispatch(loginAsync({email: login, password}))
-    console.log(login);
-    console.log(password);
-    // history.push('/briefing');
+    dispatch(loginAsync({username, password}))
     handleClose();
   };
   return (
@@ -33,10 +26,10 @@ const LoginModal: FC<ILoginModal> = ({ show, handleClose }) => {
       <Input
           placeholder="Login"
           allowClear
-          value={login}
+          value={username}
           className='modal-input'
           size='large'
-          onChange={(e:any) => setLogin(e.target.value)}
+          onChange={(e:any) => setUsername(e.target.value)}
         />
         <Input.Password
           placeholder="Password"

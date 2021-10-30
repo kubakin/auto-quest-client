@@ -1,40 +1,20 @@
 import cookies from '../../__shared/cookie';
-import { ActionInterface } from '../types';
-import { LOGIN, LOGOUT, UPDATE_TEAM, USER } from './userActions';
-import { iTeam } from '../../__shared/types';
+import { ActionInterface } from '../../__shared/types';
+import { LOGIN, LOGOUT, UPDATE_TEAM, USER, USER_LOADED } from './userActions';
+import { iUser } from '../../__shared/types';
 
-// const emptyUser = {
-//   email: "",
-//   id: -1,
-//   role: "",
-//   team: {
-//     helpstatus: 0,
-//     id: -1,
-//     name: "",
-//     next_answer: new Date(),
-//     progress: 0,
-//     status: "",
-//   },
-//   team_id: 0,
-// }
-
-interface iUser {
-    email: string;
-    id: number;
-    role: string;
-    team: iTeam | null;
-    team_id: number;
-}
 
 
 interface iState {
     user: iUser | null;
     token: string;
+    userLoaded: boolean;
 }
 
 const initState = {
     user: null,
     token: '',
+    userLoaded: false,
 };
 
 const userReducer = (
@@ -43,9 +23,6 @@ const userReducer = (
 ): iState => {
     switch (actions.type) {
         case USER:
-            console.log('work');
-            console.log(actions.payload);
-            console.log(cookies.get('auth'));
             return {
                 ...state,
                 user: actions.payload,
@@ -58,6 +35,12 @@ const userReducer = (
                 token: actions.payload,
             };
 
+        case USER_LOADED:
+            return {
+                ...state,
+                userLoaded: true
+            }
+
         case LOGOUT:
             cookies.remove('auth');
             return {
@@ -66,7 +49,6 @@ const userReducer = (
                 user: null,
             };
         case UPDATE_TEAM:
-            console.log(actions.payload);
             if (state.user) {
                 return {
                     ...state,

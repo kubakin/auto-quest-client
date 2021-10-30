@@ -5,7 +5,6 @@ import {DatePicker, Space} from "antd";
 
 const {RangePicker} = DatePicker;
 const GamePage = () => {
-    const [teams, setTeams] = useState([]);
     const [gameData, setGameData] = useState<any>();
     const changeGame = (e) => {
         console.log(e[0].toDate());

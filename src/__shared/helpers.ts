@@ -8,15 +8,11 @@ export const transformStatus = (str: string): string => {
   switch (str) {
     case Status.notStarted:
       return 'Не начал';
-      break;
     case Status.finish:
       return 'Закончил';
-      break;
     case Status.inProgress:
       return 'В квесте';
-      break;
     default:
       return str;
-      break;
   }
 }

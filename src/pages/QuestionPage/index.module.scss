@@ -42,13 +42,19 @@
     display: flex;
     flex-direction: column;
     padding: 20px 0 13px 25px;
-
+    p {
+      margin-bottom: 2px;
+    }
     justify-content: space-between;
     .time {
       color: #e06a89;
       font-size: 12px;
     }
     .progress {
+      font-size: 16px;
+      color: white;
+    }
+    .chat {
       font-size: 16px;
       color: white;
     }
@@ -87,6 +93,10 @@
     }
   }
   .questComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
     img {
       width: 300px;
     }

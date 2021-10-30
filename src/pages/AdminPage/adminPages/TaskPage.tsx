@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Upload } from "antd";
+import { Button, Input, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from 'react-router-dom';
 import API from "../../../__shared/api";
@@ -17,13 +17,6 @@ const TaskPage = () => {
     const [files, setFiles] = useState<Array<any> | any>([]);
     const showModal = () => {
         setIsModalVisible(true);
-    };
-
-    function handleClick() {
-        history.push("/home");
-    }
-    const handleOk = () => {
-        setIsModalVisible(false);
     };
 
     const handleCancel = () => {

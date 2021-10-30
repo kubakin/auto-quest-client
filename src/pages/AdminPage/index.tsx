@@ -4,20 +4,16 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./index.module.scss";
-import API from "../../__shared/api";
-import { Router, useHistory } from "react-router";
 import TaskPage from "./adminPages/TaskPage";
 import TeamPage from "./adminPages/TeamPage";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import {  Link, Route, Switch } from "react-router-dom";
 import GamePage from "./adminPages/GamePage";
 import TaskInfo from "./adminPages/TaskInfo";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminPage = ({ match }) => {
-  const history = useHistory();
-  console.log(match);
 
   return (
     <div className={styles.AdminPage}>

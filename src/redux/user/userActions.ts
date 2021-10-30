@@ -1,8 +1,10 @@
-import { ActionInterface } from './../types';
+import { ActionInterface } from '../../__shared/types';
 const USER = 'USER';
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const UPDATE_TEAM = 'UPDATE_TEAM';
+const USER_LOADED = 'USER_LOADED';
+
 const me = (user):ActionInterface => {
     return {
         type: USER,
@@ -28,6 +30,12 @@ const updateTeam = (team):ActionInterface => {
     }
 }
 
+const userLoaded = ():ActionInterface=> {
+    return {
+        type: USER_LOADED
+    }
+};
+
 export {
     me,
     USER,
@@ -36,6 +44,8 @@ export {
     logout,
     LOGOUT,
     UPDATE_TEAM,
-    updateTeam
+    updateTeam,
+    USER_LOADED,
+    userLoaded
     
 }
