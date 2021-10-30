@@ -65,11 +65,12 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "redux": "^4.1.1",
-    "node-sass": "^4.14.1",
     "redux-thunk": "^2.3.0",
+    "sass": "^1.43.4",
     "socket.io": "^4.3.1",
     "socket.io-client": "^4.3.2",
     "styled-components": "^5.1.1",
+    "true-case-path": "^2.2.1",
     "typescript": "^3.7.5",
     "universal-cookie": "^4.0.3"
   },
