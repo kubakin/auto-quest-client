@@ -30,7 +30,7 @@ const FinishPage = () => {
     const {topTeams} = useTypedSelector(state => state.game);
     // useEffect(() => {
     //     dispatch(getTopTeamAsync());
-    // }, []);
+    // }, []);g
     return <></>
     return topTeams &&(
         <div className={styles.FinishPage}>
