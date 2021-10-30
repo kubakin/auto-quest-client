@@ -5,7 +5,7 @@
   "scripts": {
     "crunch": "react-scripts start",
     "start": "node server.js",
-    "start:dev": "cross-env NODE_ENV=development react-scripts start",
+    "start:dev": "react-scripts start",
     "start:dev-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +51,7 @@
     "axios-auth-refresh": "^2.2.8",
     "classnames": "^2.3.1",
     "clsx": "^1.1.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "history": "^5.0.0",
     "lodash": "^4.17.21",

@@ -4,7 +4,8 @@ const path = require('path');
 const PORT = process.env.PORT || 8080;
 
 const app = express();
-
+require('dotenv').config();
+console.log(process.env);
 app.use(express.static(__dirname));
 app.use(express.static(path.resolve(__dirname, 'build')));
 

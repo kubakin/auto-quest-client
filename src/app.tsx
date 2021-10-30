@@ -16,13 +16,10 @@ import { ModalTypeEnum } from './types/enums';
 import { useTypedSelector } from './__shared/hooks';
 import { Spin } from 'antd';
 import FinishPage from './pages/FinishPage';
-import io from 'socket.io-client';
 import server from './__shared/socket';
 import Chat from './components/chat';
-
 const App: FC = () => {
     const dispatch = useDispatch();
-
     const value: IAuthContext = useContext(AuthContext);
     const history = useHistory();
     const {
