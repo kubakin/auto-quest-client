@@ -3,35 +3,31 @@ import { GAME, HELP, HIDE_MODAL, QUEST, SHOW_MODAL, TOP_TEAM, ADD_MSG } from './
 import { iTeam } from '../../__shared/types';
 import { transformStatus } from '../../__shared/helpers';
 
-interface TimeRange {
+
+export interface iGameData {
     start: Date,
     end: Date
+    totalTasks: number,
 }
 
 export interface iState {
-    range: TimeRange;
+    gameData: iGameData | null;
     quest: any;
-    totalTasks: 0,
     help: any;
     modal: boolean,
     textModal: string,
     topTeams: iTeam[],
-    chat: String[],
+    chat: { },
 }
 
 const initState: iState = {
-    range: {
-        start: new Date(),
-        end: new Date()
-    },
+    gameData: null,
     quest: {},
-    totalTasks: 0,
     help: {},
     modal: false,
     textModal: '',
     topTeams: [],
-    chat: ['qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty','qwerty',
-    ],
+    chat: {}
 };
 
 const gameReducer = (state: iState = initState, actions: ActionInterface): iState => {
@@ -39,8 +35,7 @@ const gameReducer = (state: iState = initState, actions: ActionInterface): iStat
         case GAME:
             return {
                 ...state,
-                range: {start: actions.payload.start, end: actions.payload.end},
-                totalTasks: actions.payload.totalTasks
+                gameData: {...actions.payload}
             };
         case QUEST:
             return {
@@ -66,10 +61,11 @@ const gameReducer = (state: iState = initState, actions: ActionInterface): iStat
             };
 
         case ADD_MSG:
-            return {
-                ...state,
-                chat: [...state.chat, actions.payload]
-            }
+                return {
+                    ...state,
+                     chat: {...state.chat, [actions.payload.team]: [...state.chat[actions.payload.team] || [], actions.payload.msg]}
+                }
+
         case TOP_TEAM:
             console.log(actions.payload);
             const topTeams = actions.payload.map(team=>{

@@ -1,14 +1,15 @@
-import React, { MouseEvent, useState } from "react";
+import React, { FC, MouseEvent, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Timer from "../../components/timer";
 import { logout } from "../../redux/user/userActions";
-import { useTypedSelector } from "../../__shared/hooks";
 import styles from "./index.module.scss";
-const BriefingPage = () => {
+import { iGameData } from '../../redux/game/gameReducer';
+
+const BriefingPage:FC<{game: iGameData}> = ({game}) => {
   const [timeEnd, setTimeEnd] = useState(false);
   const dispatch = useDispatch();
-  const { game } = useTypedSelector((state) => state);
+
   const exitHandler = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     dispatch(logout());
@@ -22,7 +23,7 @@ const BriefingPage = () => {
           <p>осталось</p>
           <div className={styles.timer}>
             <Timer
-              timerTo={new Date(game.range.start)}
+              timerTo={new Date(game.start || new Date())}
               timerEnd={() => setTimeEnd(true)}
             />
           </div>

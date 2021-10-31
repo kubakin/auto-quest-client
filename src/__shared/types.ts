@@ -65,4 +65,11 @@ export interface ActionInterface {
   type: string
 };
 
-
+export interface iUserWithTeam {
+  email: string;
+  id: number;
+  role: Role;
+  team: iTeam;
+  username: string;
+  password: string;
+}

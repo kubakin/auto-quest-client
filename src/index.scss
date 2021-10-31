@@ -45,3 +45,11 @@ input:focus {
   src: local("BAHNSCHRIFT"),
   url("__shared/fonts/BAHNSCHRIFT.TTF") format("ttf");
 }
+.width100 {
+  width: 100%;
+}
+
+.borderBottomGray {
+  border-bottom: 1px solid #d9d9d9!important;
+
+}

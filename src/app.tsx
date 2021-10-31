@@ -1,91 +1,51 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import AlertModal from './components/alertModal';
+import { Route, Switch } from 'react-router-dom';
 import LoginModal from './components/loginModal';
 import RegisterModal from './components/registerModal';
 import AuthContext, { IAuthContext } from './context';
-import AdminPage from './pages/AdminPage';
-import AuthPage from './pages/AuthPage';
-import BriefingPage from './pages/BriefingPage/briefingPage';
-import QuestionPage from './pages/QuestionPage/questionPage';
-import TeamPage from './pages/TeamPage/teamPage';
-import { addMsg, hideModal } from './redux/game/gameActions';
+import { addMsg } from './redux/game/gameActions';
 import { meAsync } from './redux/user/userAsync';
 import { ModalTypeEnum } from './types/enums';
 import { useTypedSelector } from './__shared/hooks';
-import { Spin } from 'antd';
-import FinishPage from './pages/FinishPage';
 import server from './__shared/socket';
 import Chat from './components/chat';
+import WithLoader from './components/withLoader';
+import MainDataProvider from './MainDataProvider';
+import AuthPage from './pages/AuthPage';
+
 const App: FC = () => {
     const dispatch = useDispatch();
     const value: IAuthContext = useContext(AuthContext);
-    const history = useHistory();
     const {
         user: {user, token, userLoaded},
-        game: {modal, textModal},
+        game: { gameData },
     } = useTypedSelector((state) => state);
-
-    useEffect(() => {
-        if (user?.team?.name) {
-            console.log('socket listener is started');
-            server.emit('join', user?.team?.name);
-            server.on('next', (e) => {
-                dispatch(meAsync());
-            });
-            server.on('chat', (msg)=> {
-                dispatch(addMsg(msg));
-            })
-        }
-    }, [user?.team?.name]);
 
     useEffect(() => {
         dispatch(meAsync());
     }, [dispatch, token]);
 
-    useEffect(() => {
-        if (userLoaded) {
-            if (!user || history.location.pathname === '/') {
-                history.push('/auth');
-            }
-            if ((user && history.location.pathname === '/auth')) {
-                history.push('/team');
-            }
-        }
-    }, [history, user, userLoaded]);
-    const sock = () => {
-        server.emit('next', user?.team?.name);
-    };
-    return userLoaded ? (
-        <>
-            {/*<button onClick={sock}>qwe</button>*/}
+    return (
+        <WithLoader condition={gameData && userLoaded}>
             <Switch>
-                <Route path="/auth" component={AuthPage}/>
-                <Route path="/team" component={TeamPage}/>
-                <Route path="/briefing" component={BriefingPage}/>
-                <Route path="/quest" component={QuestionPage}/>
-                <Route path="/admin" component={AdminPage}/>
-                <Route path="/finish" component={FinishPage}/>
+                {gameData && user && <MainDataProvider user={user} gameData={gameData}/>}
+                <Route path={'/'} component={AuthPage}></Route>
             </Switch>
             <RegisterModal
                 handleClose={() => value.setModalType(ModalTypeEnum.none)}
-                show={value.modalType === ModalTypeEnum.signUp}
+                show={value.modalType === ModalTypeEnum.signUp && !user}
             />
             <LoginModal
                 handleClose={() => value.setModalType(ModalTypeEnum.none)}
-                show={value.modalType === ModalTypeEnum.signIn}
+                show={value.modalType === ModalTypeEnum.signIn && !user}
             />
             <Chat
                 handleClose={() => value.setModalType(ModalTypeEnum.none)}
                 show={value.modalType === ModalTypeEnum.chat}
+                team={user?.team || null}
             />
-            <AlertModal
-                clickHandler={() => dispatch(hideModal())}
-                visible={modal}
-                text={textModal}
-            />
-        </>
-    ) : <div className="spinner-page"><Spin tip="Loading..."/></div>;
+        </WithLoader>
+    );
 };
 export default App;

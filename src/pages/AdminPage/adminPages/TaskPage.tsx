@@ -1,20 +1,45 @@
-import { Button, Input, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button, Card, Form, Input, Modal, Upload } from 'antd';
+import React, { FC, useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
-import API from "../../../__shared/api";
-import styles from "./index.module.scss";
+import API from '../../../__shared/api';
+import styles from './index.module.scss';
+import FileType from '../../../components/fileType';
+import { iTask } from '../../../__shared/types';
+import { UploadOutlined } from '@ant-design/icons';
+
+const {Meta} = Card;
 
 interface DataI<T> {
-    data: T
+    data: T;
 }
+
+export interface CreateTaskDto {
+    text: string;
+    answer: string;
+}
+
+
+export const postTask = async (fieldValues, file) => {
+    let formData = new FormData();
+    formData.append('val', JSON.stringify(fieldValues));
+    formData.append('file', file[0]);
+    await API.post('/task', formData)
+        .then((data: DataI<number>) => {
+            console.log(data);
+        });
+};
 
 const TaskPage = () => {
     const history = useHistory();
     const [tasks, setTasks] = useState<any>([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [text, setText] = useState('');
-    const [answer, setAnswer] = useState('');
-    const [files, setFiles] = useState<Array<any> | any>([]);
+
+    const createTask = async (obj: CreateTaskDto, file) => {
+        await postTask(obj, file);
+        setIsModalVisible(false);
+        getTasks();
+    };
+
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -22,74 +47,92 @@ const TaskPage = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    useEffect(() => {
-        API.get("/task").then((data) => {
+
+    const getTasks = async () => {
+        const data = await API.get('/task').then((data) => {
             setTasks(data.data);
-            console.log(data.data);
         });
+        return data;
+    }
+    useEffect(function() {
+        getTasks();
     }, []);
 
-    const postTask = () => {
-        const file = files[0];
-        const formData = new FormData();
-        formData.append('file', file)
-        formData.append('text', text)
-        formData.append('answer', answer)
-        API.post('/task', formData)
-            .then((data: DataI<number>) => setTasks(prev => {
-                return [...prev, data.data]
-            }))
-        setIsModalVisible(false);
-    }
+
     return (
         <>
-            <Button type="primary" onClick={showModal}>
+            <Button className={styles.actionButton} type="primary" onClick={showModal}>
                 Создать
             </Button>
             <div className={styles.TaskPage}>
-                <div className={styles.taskRow}>
-                    <div>id</div>
-                    <div>Текст</div>
-                    <div>Ответ</div>
-                </div>
-                {tasks?.length > 0 ? (
-                    tasks.map((item: any) => {
+                <div className={styles.tasks}>
+                {
+                    tasks.map((item: iTask) => {
                         return (
-                            <div className={styles.taskWithHelps} onClick={() => history.push(`/admin/tasks/${item.id}`)}>
-                                <div className={styles.taskRow}>
-                                    <div>{item.id}</div>
-                                    <div>{item.text}</div>
-                                    <div>{item.answer}</div>
-                                </div>
-                                {/* <div>{item.text}</div> */}
-                                {/*<div>*/}
-                                {/*    {item?.helps?.length > 0 ? (*/}
-                                {/*        item?.helps?.map((item) => {*/}
-                                {/*            return <div className={styles.helpRow}>{item.text}</div>;*/}
-                                {/*        })*/}
-                                {/*    ) : (*/}
-                                {/*        <></>*/}
-                                {/*    )}*/}
-                                {/*</div>*/}
+                            <div className={styles.task} onClick={() => history.push(`/admin/tasks/${item.id}`)}>
+                                <TaskItem key={item.id} task={item}/>
                             </div>
                         );
                     })
-                ) : (
-                    <></>
-                )}
+                }
+                </div>
             </div>
             <>
+                <CreateUpdateTask handleSubmit={(obj, file) => createTask(obj, file)} handleCancel={handleCancel}
+                            isModalVisible={isModalVisible}/>
 
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={postTask} onCancel={handleCancel}>
-                    <span>Текст задания:</span>
-                    <Input value={text} onChange={(e) => setText(e.target.value)} />
-                    <span>Ответ:</span>
-                    <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />
-                    <span>Файл:</span>
-                    <input type="file" onChange={(e) => setFiles(e.target.files)} name="" id="" />
-                </Modal>
             </>
         </>
     );
 };
 export default withRouter(TaskPage);
+
+export const CreateUpdateTask: FC<{
+    isModalVisible: boolean,
+    handleCancel: () => void,
+    initState?: iTask,
+    handleSubmit: (obj: CreateTaskDto, file) => void
+}> = ({
+          isModalVisible,
+          handleCancel,
+          initState,
+          handleSubmit
+      }) => {
+    const [file, setFile] = useState<Array<any> | any>([]);
+    const [form] = Form.useForm();
+
+    return (
+        <Modal title="Создать задание" visible={isModalVisible} onOk={() => handleSubmit(form.getFieldsValue(), file)}
+               onCancel={handleCancel}>
+            <Form form={form}>
+                <Form.Item
+                    name={'text'}
+                    label={'Текст'}
+                    initialValue={initState?.text || ''}
+                >
+                    <Input/>
+                </Form.Item>
+                <Form.Item
+                    name={'answer'}
+                    label={'Ответ'}
+                    initialValue={initState?.answer || ''}
+                >
+                    <Input/>
+                </Form.Item>
+                <Input onChange={(e) => setFile(e.target.files)} type={'file'}/>
+            </Form>
+        </Modal>
+    );
+};
+
+const TaskItem: FC<{ task: iTask }> = ({task}) => {
+    return (
+        <Card
+            hoverable
+            style={{width: 240}}
+            cover={<FileType task={task}/>}
+        >
+            <Meta title={task.text} description={task.answer}/>
+        </Card>
+    );
+};

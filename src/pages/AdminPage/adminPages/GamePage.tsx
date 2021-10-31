@@ -1,40 +1,29 @@
-import React, {useEffect, useState} from "react";
+import React, { FC, useEffect, useState } from 'react';
 import API from "../../../__shared/api";
-import moment from "moment";
-import {DatePicker, Space} from "antd";
+import moment, { Moment } from 'moment';
+import { Button, DatePicker, Space } from 'antd';
+import { useTypedSelector } from '../../../__shared/hooks';
+import { isEmpty } from '../../../__shared/helpers';
+import { iGameData } from '../../../redux/game/gameReducer';
 
-const {RangePicker} = DatePicker;
-const GamePage = () => {
-    const [gameData, setGameData] = useState<any>();
-    const changeGame = (e) => {
-        console.log(e[0].toDate());
-        API.post("/game", {start: e[0], end: e[1]})
+const GamePage:FC<{game: iGameData}> = ({game}) => {
+    const [start, setStart] = useState<Moment | null>(moment(game.start));
+    const [end, setEnd] = useState<Moment | null>(moment(game.end));
+    const changeGame = () => {
+        API.post("/game", {start, end})
             .then((data) => {
                 console.log(data.data);
             });
     };
-    useEffect(() => {
-        API.get("/game").then((data) => {
-            setGameData([data.data.game.start, data.data.game.end]);
-        });
-    }, []);
-    return (
+    return game ? (
         <div>
-            <Space direction="vertical" size={12}>
-                {gameData?.length > 1 ? <RangePicker
-                    onChange={(e) => changeGame(e)}
-                    value={[moment(gameData[0]), moment(gameData[1])]}
-                    showTime={{
-                        hideDisabledOptions: true,
-                        defaultValue: [
-                            moment("00:00:00", "HH:mm:ss"),
-                            moment("11:59:59", "HH:mm:ss"),
-                        ],
-                    }}
-                    format="YYYY-MM-DD HH:mm:ss"
-                /> : <></>}
-            </Space>
-        </div>
-    );
+            <p>СТАРТ: {`${moment(game.start).format('MMMM Do YYYY, h:mm:ss')}`}</p>
+            <p>КОНЕЦ: {`${moment(game.end).format('MMMM Do YYYY, h:mm:ss')}`}</p>
+        <DatePicker showTime onOk={(val) => setStart(val)}/>
+        <DatePicker showTime onChange={(e) => setEnd(e)}/>
+        <Button onClick={changeGame}>Сохранить</Button>
+    </div>
+
+    ) : <></>;
 };
 export default GamePage;
