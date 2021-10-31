@@ -17,6 +17,7 @@ const Main = () => {
       <Provider store={store}>
         <AuthContext.Provider value={{ modalType, setModalType }}>
           <BrowserRouter>
+
             <App />
           </BrowserRouter>
         </AuthContext.Provider>
