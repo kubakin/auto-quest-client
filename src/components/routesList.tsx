@@ -11,11 +11,7 @@ import { iGameData } from '../redux/game/gameReducer';
 
 const RoutesList:FC<{user: iUser | null, gameData: iGameData}> = ({user, gameData}) => {
     const routesList = [
-        {
-            path: '/team',
-            component: TeamPage,
-            condition: user
-        },
+
         {
             path: '/briefing',
             component: BriefingPage,
@@ -35,7 +31,12 @@ const RoutesList:FC<{user: iUser | null, gameData: iGameData}> = ({user, gameDat
             path: '/finish',
             component: FinishPage,
             condition: user?.team?.status === Status.FINISHED
-        }
+        },
+        {
+            path: '/',
+            component: TeamPage,
+            condition: user,
+        },
 
     ];
     return (
