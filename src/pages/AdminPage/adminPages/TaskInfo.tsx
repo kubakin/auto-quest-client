@@ -1,6 +1,6 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import API from '../../../__shared/api';
 import { iHelp, iTask } from '../../../__shared/types';
 import styles from './index.module.scss';
@@ -26,10 +26,9 @@ const TaskInfo = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalTaskVisible, setIsModalTaskVisible] = useState(false);
     const [text, setText] = useState('');
-
+    const history = useHistory();
     const showModal = () => setIsModalVisible(true);
     const hideModal = () => setIsModalVisible(false);
-
     const updateTask = async (obj: CreateTaskDto, file) => {
         await postTask({...taskInfo, ...obj}, file);
         getTask();
@@ -39,6 +38,12 @@ const TaskInfo = () => {
     const getTask = async () => {
         await API.get(`/task/${routerParams.id}`).then((data) => {
             setTaskInfo(data.data);
+        });
+    }
+
+    const deleteTask = async () => {
+        await API.post(`/task/delete/${routerParams.id}`).then((data) => {
+            history.push('/admin/tasks');
         });
     }
 
@@ -59,6 +64,7 @@ const TaskInfo = () => {
         taskInfo ? (
         <div>
             <Button onClick={()=>setIsModalTaskVisible(true)}>Обновить</Button>
+            <Button onClick={()=>deleteTask()}>Удалить</Button>
             <CreateUpdateTask initState={taskInfo} isModalVisible={isModalTaskVisible} handleCancel={()=>setIsModalTaskVisible(false)} handleSubmit={(obj, file)=>updateTask(obj, file)}/>
             <div className={styles.taskInfo}>
                 <div className={styles.row}>
