@@ -28,10 +28,10 @@ const columns = [
 const FinishPage = () => {
     const dispatch = useDispatch();
     const {topTeams} = useTypedSelector(state => state.game);
-    // useEffect(() => {
-    //     dispatch(getTopTeamAsync());
-    // }, []);g
-    return <></>
+    useEffect(() => {
+        dispatch(getTopTeamAsync());
+    }, []);
+    // return <></>
     return topTeams &&(
         <div className={styles.FinishPage}>
             <div>TOP 10</div>

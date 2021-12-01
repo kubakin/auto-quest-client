@@ -2,12 +2,14 @@ import { ActionInterface } from '../../__shared/types';
 import { GAME, HELP, HIDE_MODAL, QUEST, SHOW_MODAL, TOP_TEAM, ADD_MSG } from './gameActions';
 import { iTeam } from '../../__shared/types';
 import { transformStatus } from '../../__shared/helpers';
+import { StatusGame } from '../../__shared/enum';
 
 
 export interface iGameData {
     start: Date,
     end: Date
     totalTasks: number,
+    statusGame: StatusGame
 }
 
 export interface iState {

@@ -7,22 +7,27 @@ import React, { FC } from 'react';
 import { iUser, Role } from '../../../__shared/types';
 import { iGameData } from '../../../redux/game/gameReducer';
 
+export const baseAdminPath = '/admin';
+
 const RoutesAdminList: FC<{ user: iUser, match: any, game: iGameData }> = ({user, match, game}) => {
+
+
+
     const routesList = [
         {
-            path: match.path + '/tasks',
+            path: baseAdminPath + '/tasks',
             component: TaskPage,
         },
         {
-            path: match.path + '/tasks/:id',
+            path: baseAdminPath + '/tasks/:id',
             component: TaskInfo,
         },
         {
-            path: match.path + '/team',
+            path: baseAdminPath + '/team',
             component: TeamPage,
         },
         {
-            path: match.path + '/game',
+            path: baseAdminPath,
             component: GamePage,
         }
     ];

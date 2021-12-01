@@ -69,7 +69,7 @@ const TaskPage = () => {
                 {
                     tasks.map((item: iTask) => {
                         return (
-                            <div className={styles.task} onClick={() => history.push(`/admin/tasks/${item.id}`)}>
+                            <div key={item.id} className={styles.task} onClick={() => history.push(`/admin/tasks/${item.id}`)}>
                                 <TaskItem key={item.id} task={item}/>
                             </div>
                         );

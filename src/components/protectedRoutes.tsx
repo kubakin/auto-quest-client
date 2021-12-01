@@ -9,7 +9,7 @@ const ProtectedRoute = ({component: Component, condition, gameData,  ...rest}) =
             } else {
                 return <Redirect to={
                     {
-                        pathname: '/team',
+                        pathname: '/',
                         state: {
                             from: props.location
                         }

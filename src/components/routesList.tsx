@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import TeamPage from '../pages/TeamPage/teamPage';
-import AuthPage from '../pages/AuthPage';
 import BriefingPage from '../pages/BriefingPage/briefingPage';
 import QuestionPage from '../pages/QuestionPage/questionPage';
 import AdminPage from '../pages/AdminPage';
@@ -8,6 +7,8 @@ import FinishPage from '../pages/FinishPage';
 import ProtectedRoute from './protectedRoutes';
 import { iUser, Role, Status } from '../__shared/types';
 import { iGameData } from '../redux/game/gameReducer';
+import InstructionPage from '../pages/InstructionPage';
+import { StatusGame } from '../__shared/enum';
 
 const RoutesList:FC<{user: iUser | null, gameData: iGameData}> = ({user, gameData}) => {
     const routesList = [
@@ -19,24 +20,30 @@ const RoutesList:FC<{user: iUser | null, gameData: iGameData}> = ({user, gameDat
         },
         {
             path: '/quest',
-            component: QuestionPage,
-            condition: user?.team && user.team.status === Status.ACTIVATED ? user : null
+            component: user?.team && user.team.status === Status.ACTIVATED ? QuestionPage : FinishPage,
+            condition: user?.team && user.team.status !== Status.NOT_ACTIVATED ? user : null
         },
         {
-            path: '/admin',
+            path: '/admin/:path',
             component: AdminPage,
             condition: user?.role === Role.Admin ? user : null,
+            exact: false
         },
         {
             path: '/finish',
             component: FinishPage,
-            condition: user?.team?.status === Status.FINISHED
+            condition: user?.team?.status === Status.FINISHED || gameData.statusGame === StatusGame.FINISHED
         },
         {
             path: '/',
             component: TeamPage,
             condition: user,
         },
+        {
+            path: '/instruction',
+            component: InstructionPage,
+            condition: user?.team?.status === Status.ACTIVATED
+        }
 
     ];
     return (
@@ -44,7 +51,7 @@ const RoutesList:FC<{user: iUser | null, gameData: iGameData}> = ({user, gameDat
             {
                 routesList.map(route=> {
                     return (
-                        <ProtectedRoute gameData={gameData} key={route.path} {...route}/>
+                        <ProtectedRoute exact gameData={gameData} key={route.path} {...route}/>
                     )
                 })
             }

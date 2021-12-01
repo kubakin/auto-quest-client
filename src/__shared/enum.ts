@@ -3,3 +3,9 @@ export enum Status  {
     finish = 'finish',
     notStarted  = 'notStarted',
 };
+
+export enum StatusGame {
+    NOT_STARTED,
+    STARTED,
+    FINISHED
+};

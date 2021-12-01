@@ -12,13 +12,14 @@ import { Link, Route, Switch } from 'react-router-dom';
 import GamePage from './adminPages/GamePage';
 import TaskInfo from './adminPages/TaskInfo';
 import server from '../../__shared/socket';
-import RoutesAdminList from './components/routesAdminList';
+import RoutesAdminList, { baseAdminPath } from './components/routesAdminList';
 import { iUser } from '../../__shared/types';
 import { iGameData } from '../../redux/game/gameReducer';
 
 const {Header, Content, Footer, Sider} = Layout;
 
 const AdminPage: FC<{ user: iUser, game: iGameData, match: any }> = ({match, user, game}) => {
+
     useEffect(() => {
         server.emit('join', 'admin');
     });
@@ -34,13 +35,13 @@ const AdminPage: FC<{ user: iUser, game: iGameData, match: any }> = ({match, use
                         defaultSelectedKeys={[window.location.pathname]}
                     >
                         <Menu.Item key={match.path + '/tasks'} icon={<UserOutlined/>}>
-                            <Link to={match.path + '/tasks'}>Задания</Link>
+                            <Link to={baseAdminPath + '/tasks'}>Задания</Link>
                         </Menu.Item>
                         <Menu.Item key={match.path + '/team'} icon={<VideoCameraOutlined/>}>
-                            <Link to={match.path + '/team'}>Команды</Link>
+                            <Link to={baseAdminPath + '/team'}>Команды</Link>
                         </Menu.Item>
                         <Menu.Item key={match.path + '/game'} icon={<UploadOutlined/>}>
-                            <Link to={match.path + '/game'}>Игра</Link>
+                            <Link to={baseAdminPath + '/game'}>Игра</Link>
                         </Menu.Item>
 
                     </Menu>
