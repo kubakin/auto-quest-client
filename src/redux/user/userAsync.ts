@@ -1,6 +1,6 @@
 import { getGameAsync } from './../game/gameAsync';
 import API from '../../__shared/api';
-import { login, me, updateTeam, userLoaded } from './userActions';
+import { login, me, updateTeam, userLoaded, userStartLoad } from './userActions';
 import { AxiosResponse } from 'axios';
 import { iTeam, iUser } from '../../__shared/types';
 import server from '../../__shared/socket';
@@ -8,6 +8,7 @@ import { message } from 'antd';
 
 export const meAsync = (): any => {
     return (dispatch: any) => {
+        dispatch(userStartLoad());
         API.get('/auth/me').then((data: AxiosResponse<iUser>) => {
             dispatch(me(data.data));
             dispatch(getGameAsync());
@@ -20,6 +21,7 @@ export const meAsync = (): any => {
 
 export const meAsyncGlobal = (): any => {
     return (dispatch: any) => {
+        dispatch(userStartLoad());
         API.get('/auth/me').then((data: AxiosResponse<iUser>) => {
             dispatch(me(data.data));
             dispatch(getGameAsync());

@@ -6,6 +6,7 @@ import GamePage from '../adminPages/GamePage';
 import React, { FC } from 'react';
 import { iUser, Role } from '../../../__shared/types';
 import { iGameData } from '../../../redux/game/gameReducer';
+import TeamInfo from '../adminPages/TeamInfo';
 
 export const baseAdminPath = '/admin';
 
@@ -27,7 +28,11 @@ const RoutesAdminList: FC<{ user: iUser, match: any, game: iGameData }> = ({user
             component: TeamPage,
         },
         {
-            path: baseAdminPath,
+            path: baseAdminPath + '/team/:id',
+            component: TeamInfo,
+        },
+        {
+            path: baseAdminPath + '/game',
             component: GamePage,
         }
     ];

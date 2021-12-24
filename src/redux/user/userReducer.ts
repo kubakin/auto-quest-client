@@ -1,6 +1,6 @@
 import cookies from '../../__shared/cookie';
 import { ActionInterface } from '../../__shared/types';
-import { LOGIN, LOGOUT, UPDATE_TEAM, USER, USER_LOADED } from './userActions';
+import { LOGIN, LOGOUT, UPDATE_TEAM, USER, USER_LOADED, USER_START_LOAD } from './userActions';
 import { iUser } from '../../__shared/types';
 
 
@@ -41,6 +41,11 @@ const userReducer = (
                 userLoaded: true
             }
 
+        case USER_START_LOAD:
+            return {
+                ...state,
+                userLoaded: false
+            }
         case LOGOUT:
             cookies.remove('auth');
             return {

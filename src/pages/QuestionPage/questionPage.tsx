@@ -1,4 +1,4 @@
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, Spin } from 'antd';
 import React, { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getGameAsync, getHelpAsync, toAnswerAsync } from '../../redux/game/gameAsync';
@@ -12,14 +12,18 @@ import AuthContext, { IAuthContext } from '../../context';
 import { ModalTypeEnum } from '../../types/enums';
 import { iGameData } from '../../redux/game/gameReducer';
 import { StatusGame } from '../../__shared/enum';
+import { useTypedSelector } from '../../__shared/hooks';
 
 const toMinutesLeft = (stamp:number):number => {
-  return Math.round((stamp - new Date().getTime()) / 1000 / 60);
+  return Math.ceil((stamp - new Date().getTime()) / 1000 / 60);
 }
 
 const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const {
+    user: {userLoaded},
+  } = useTypedSelector((state) => state);
   const task = user.team?.currentTask?.task;
   const team = user?.team;
   const [timeLeftToHelp, setTimeLeftToHelp] = useState(0);
@@ -36,6 +40,7 @@ const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) =
 
   const toAnswer = () => {
     dispatch(toAnswerAsync(answer))
+    setAnswer('');
   }
 
   useEffect(()=> {
@@ -73,13 +78,14 @@ const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) =
 
   })
   return task && team ? (
+      <>            {!userLoaded && <div className={'shadow'}><Spin tip="Loading..."/></div>}
     <div className={styles.questionPage}>
       <Row justify="space-around">
         <Col onClick={getHelp}>
           <AnswerComponent min={timeLeftToHelp} />
         </Col>
         <Col onClick={()=>value.setModalType(ModalTypeEnum.chat)}>
-          <ProgressComponent  progress={team.progress} totalTasks={3} min={timeLeftToEnd} />
+          <ProgressComponent  progress={team.progress} totalTasks={game.totalTasks} min={timeLeftToEnd} />
         </Col>
       </Row>
       <div  className={styles.questComponent}>
@@ -91,6 +97,9 @@ const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) =
         <Col span={8}><Button onClick={()=>toAnswer()}>Отправить</Button></Col>
       </Row>
     </div>
+      </>
+
   ): <></>;
+
 };
 export default QuestionPage;

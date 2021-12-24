@@ -26,21 +26,15 @@ const columns = [
 ];
 
 const FinishPage = () => {
-    const dispatch = useDispatch();
-    const {topTeams} = useTypedSelector(state => state.game);
-    useEffect(() => {
-        dispatch(getTopTeamAsync());
-    }, []);
-    // return <></>
-    return topTeams &&(
+    // const dispatch = useDispatch();
+    // const {topTeams} = useTypedSelector(state => state.game);
+    // useEffect(() => {
+    //     dispatch(getTopTeamAsync());
+    // }, []);
+    return (
         <div className={styles.FinishPage}>
-            <div>TOP 10</div>
-            <Table
-                pagination={false}
-                dataSource={topTeams} columns={columns}/>
-            <button onClick={()=>dispatch(logout())}>EXIT</button>
-        </div>
+            <h1>Ждем вас на старте для подведения итогов!</h1>
+        </div>)
 
-    );
 };
 export default FinishPage;

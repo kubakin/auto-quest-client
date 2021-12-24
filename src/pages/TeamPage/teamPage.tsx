@@ -10,8 +10,11 @@ import { useTypedSelector } from '../../__shared/hooks';
 import plus from './media/plus.png';
 import TeamBlock from './components/teamBlock';
 import { Status } from '../../__shared/types';
+import { StatusGame } from '../../__shared/enum';
+import { iGameData } from '../../redux/game/gameReducer';
 
-const TeamPage: FC = () => {
+const TeamPage: FC<{game: iGameData}> = ({game}) => {
+    console.log(game);
     const [enterModal, setEnterModal] = useState(false);
     const [createModal, setCreateModal] = useState(false);
     const [name, setName] = useState('');
@@ -57,14 +60,18 @@ const TeamPage: FC = () => {
                         <img alt="plus" src={plus}/>
                         <p>Создать команду</p>
                     </Row>
+                    {game.statusGame === StatusGame.TEST && <button onClick={()=>dispatch(meAsync())}>TEST</button>}
                 </div> : <TeamBlock leaveTeam={() => dispatch(leaveTeamAsync())} team={user.user?.team}/>}
 
-                {user.user?.team?.status === Status.NOT_ACTIVATED && <Row className={styles.activationWait}>
-                    <p>Дождитесь активации команды</p>
-                </Row>}
-                {user.user?.team?.status === Status.ACTIVATED && <Row className={styles.briefingLink}>
+                {/*{user.user?.team?.status === Status.NOT_ACTIVATED && <Row className={styles.activationWait}>*/}
+                {/*    <p>Дождитесь активации команды</p>*/}
+                {/*</Row>}*/}
+                {<Row className={styles.briefingLink}>
                     <Link to="/briefing">Перейти к брифингу</Link>
                 </Row>}
+                {/*{user.user?.team?.status === Status.ACTIVATED && <Row className={styles.briefingLink}>*/}
+                {/*    <Link to="/briefing">Перейти к брифингу</Link>*/}
+                {/*</Row>}*/}
             </div>
             <Modal
                 title="Вступить"

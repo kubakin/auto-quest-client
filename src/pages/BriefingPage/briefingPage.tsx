@@ -6,10 +6,28 @@ import styles from './index.module.scss';
 import { iGameData } from '../../redux/game/gameReducer';
 import { StatusGame } from '../../__shared/enum';
 import { getGameAsync } from '../../redux/game/gameAsync';
+import { useTypedSelector } from '../../__shared/hooks';
+import { Status } from '../../__shared/types';
+import { meAsync } from '../../redux/user/userAsync';
 
 const BriefingPage:FC<{game: iGameData}> = ({game}) => {
   const [timeEnd, setTimeEnd] = useState(false);
+  const user = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    const tick = setInterval(()=> {
+      console.log('tick');
+      dispatch(meAsync());
+    }, 3000)
+    if (user.user?.team?.status === Status.ACTIVATED) {
+      clearInterval(tick);
+    }
+    return function cleanup() {
+      clearInterval(tick);
+    }
+  }, [user])
+
   useEffect(()=> {
     const tick = setInterval(()=> {
       dispatch(getGameAsync());
@@ -40,7 +58,7 @@ const BriefingPage:FC<{game: iGameData}> = ({game}) => {
       {/*    </div>*/}
       {/*  </div>*/}
       {/*) : (*/}
-      {game.statusGame === StatusGame.STARTED && <Link className={styles.startQuestLink} to='/quest'>Начать квест</Link>}
+      {game.statusGame === StatusGame.STARTED && user.user?.team?.status === Status.ACTIVATED && <Link className={styles.startQuestLink} to='/quest'>Начать квест</Link>}
       {game.statusGame === StatusGame.NOT_STARTED && <p className={styles.waitGame}>Дождитесь начала следующей игры</p>}
       {/*// )}*/}
 

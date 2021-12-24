@@ -14,6 +14,7 @@ interface RouterParams {
 interface iHelpForm {
     task_id: number;
     text: string;
+    price: number;
 }
 
 interface DataI<T> {
@@ -26,6 +27,7 @@ const TaskInfo = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalTaskVisible, setIsModalTaskVisible] = useState(false);
     const [text, setText] = useState('');
+    const [price, setPrice] = useState('');
     const history = useHistory();
     const showModal = () => setIsModalVisible(true);
     const hideModal = () => setIsModalVisible(false);
@@ -53,7 +55,7 @@ const TaskInfo = () => {
 
     const postHelp = () => {
         if (!text) return;
-        const form: iHelpForm = {task_id: Number(routerParams.id), text: text};
+        const form: iHelpForm = {task_id: Number(routerParams.id), text: text, price: Number(price)};
         API.post('/help', form)
             .then((data: DataI<iHelp>) => setTaskInfo(prev => {
                 return prev ? {...prev, helps: [...(prev.helps), data.data]} : undefined;
@@ -110,6 +112,7 @@ const TaskInfo = () => {
                 <Modal title="Создание новой подсказки" visible={isModalVisible} onOk={postHelp} onCancel={hideModal}>
                     <p>Текст подсказки:</p>
                     <Input value={text} onChange={(e) => setText(e.target.value)}/>
+                    <Input value={price} onChange={(e) => setPrice(e.target.value)}/>
                 </Modal>
             </>
         </div>

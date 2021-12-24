@@ -7,5 +7,14 @@ export enum Status  {
 export enum StatusGame {
     NOT_STARTED,
     STARTED,
-    FINISHED
+    FINISHED,
+    TEST,
 };
+
+
+export enum StatusTeam  {
+    PROGRESS = 'IN_PROGRESS',
+    FINISHED = 'FINISHED',
+    ACTIVATED  = 'ACTIVATED',
+    NOT_ACTIVATED = 'NOT_ACTIVATED',
+}

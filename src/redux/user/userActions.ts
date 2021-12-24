@@ -4,6 +4,7 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const UPDATE_TEAM = 'UPDATE_TEAM';
 const USER_LOADED = 'USER_LOADED';
+const USER_START_LOAD = 'USER_START_LOAD';
 
 const me = (user):ActionInterface => {
     return {
@@ -36,6 +37,12 @@ const userLoaded = ():ActionInterface=> {
     }
 };
 
+const userStartLoad = ():ActionInterface=> {
+    return {
+        type: USER_START_LOAD
+    }
+};
+
 export {
     me,
     USER,
@@ -46,6 +53,8 @@ export {
     UPDATE_TEAM,
     updateTeam,
     USER_LOADED,
-    userLoaded
+    userLoaded,
+    USER_START_LOAD,
+    userStartLoad
     
 }

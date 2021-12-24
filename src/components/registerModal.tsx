@@ -13,7 +13,7 @@ const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
   const handleOk = () => {
-    dispatch(registerAsync({username, password}));
+    dispatch(registerAsync({username: username.toLowerCase(), password: password.toLowerCase()}));
     handleClose();
   };
   return (
@@ -31,7 +31,7 @@ const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
           onChange={(e) => setLogin(e.target.value)}
         /> */}
         <Input
-          placeholder="Email"
+          placeholder="Номер телефона"
           allowClear
           autoComplete={'false'}
           aria-autocomplete={'none'}

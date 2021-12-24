@@ -14,6 +14,7 @@ import WithLoader from './components/withLoader';
 import MainDataProvider from './MainDataProvider';
 import AuthPage from './pages/AuthPage';
 import AlertModal from './components/alertModal';
+import { Spin } from 'antd';
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const App: FC = () => {
     }, [dispatch, token]);
 
     return (
-        <WithLoader condition={gameData && userLoaded}>
+        <>
             <Switch>
                 {gameData && user && <MainDataProvider user={user} gameData={gameData}/>}
                 <Route path={'/'} component={AuthPage}></Route>
@@ -51,7 +52,7 @@ const App: FC = () => {
                 show={value.modalType === ModalTypeEnum.chat}
                 team={user?.team || null}
             />
-        </WithLoader>
+        </>
     );
 };
 export default App;

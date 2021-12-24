@@ -6,6 +6,7 @@ export enum Role {
 export enum FileType {
   AUDIO = 'audio',
   IMAGE = 'image',
+  VIDEO = 'video',
   NO_FILE = 'noFile',
 }
 

@@ -9,7 +9,8 @@ export interface iGameData {
     start: Date,
     end: Date
     totalTasks: number,
-    statusGame: StatusGame
+    statusGame: StatusGame,
+    mix: boolean
 }
 
 export interface iState {

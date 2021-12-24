@@ -12,7 +12,7 @@ const LoginModal: FC<ILoginModal> = ({ show, handleClose }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const handleOk = () => {
-    dispatch(loginAsync({username, password}))
+    dispatch(loginAsync({username: username.toLowerCase(), password: password.toLowerCase()}))
     handleClose();
   };
   return (
@@ -24,7 +24,7 @@ const LoginModal: FC<ILoginModal> = ({ show, handleClose }) => {
     >
       <>
       <Input
-          placeholder="Login"
+          placeholder="Номер телефона"
           allowClear
           value={username}
           className='modal-input'

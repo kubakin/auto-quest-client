@@ -4,6 +4,7 @@ import { iTeam } from '../../../__shared/types';
 import styles from './index.module.scss';
 import { Button, Col, List, Row } from 'antd';
 import Chat from '../../../components/chat';
+import { useHistory } from 'react-router-dom';
 
 const TeamPage = () => {
     const [teams, setTeams] = useState<iTeam[]>([]);
@@ -72,13 +73,14 @@ const TeamRow: FC<{
     actionHandler: (id: number) => void,
     chatHandler: (team: iTeam) => void
 }> = ({team, actionHandler, chatHandler}) => {
+    const history = useHistory();
     const clickChatHandler = (e, team) => {
         e.preventDefault();
         chatHandler(team);
     };
     return (
         <Row className={'width100'}>
-            <Col span={6}>{team.name} </Col>
+            <Col onClick={() => history.push(`/admin/team/${team.id}`)} span={6}>{team.name} </Col>
             <Col span={6}><a href="" onClick={(e) => clickChatHandler(e, team)}>Начать чат</a></Col>
             <Col span={6}>{team.status}</Col>
             <Col span={6}><Button onClick={() => actionHandler(team.id)}>Activate</Button></Col>
