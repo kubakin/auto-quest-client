@@ -7,7 +7,7 @@
     "start": "node server.js",
     "start:dev": "react-scripts start --port=80",
     "start:dev-server": "node server.js",
-    "build": "cross-env REACT_APP_BASE_URL = http:/89.108.98.122:3000 react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier \"{src,test}/**/*.{ts,json,tsx,js}\" -c",
