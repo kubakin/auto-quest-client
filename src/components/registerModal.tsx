@@ -13,8 +13,10 @@ const RegisterModal:FC<IRegisterModal> = ({show, handleClose})  => {
   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
   const handleOk = () => {
-    dispatch(registerAsync({username: username.toLowerCase(), password: password.toLowerCase()}));
-    handleClose();
+    if (username) {
+      dispatch(registerAsync({username: username.toLowerCase(), password: password.toLowerCase()}));
+      handleClose();
+    }
   };
   return (
     <Modal

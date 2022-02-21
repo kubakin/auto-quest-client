@@ -12,8 +12,11 @@ const LoginModal: FC<ILoginModal> = ({ show, handleClose }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const handleOk = () => {
+    if (username) {
     dispatch(loginAsync({username: username.toLowerCase(), password: password.toLowerCase()}))
     handleClose();
+    }
+
   };
   return (
     <Modal

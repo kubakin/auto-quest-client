@@ -54,6 +54,11 @@ const TaskInfo = () => {
         getTask();
     }, [routerParams]);
 
+    const deleteHelp = async (id: number) => {
+        await API.post(`/help/delete/${id}`)
+        window.location.reload();
+    }
+
     const postHelp = () => {
         if (!text) return;
         const form: iHelpForm = {task_id: Number(routerParams.id), text: text, price: Number(price)};
@@ -113,6 +118,7 @@ const TaskInfo = () => {
                             <div>{item.id}</div>
                             <div>{item.text}</div>
                             <div>{item.price}</div>
+                            <Button onClick={()=>deleteHelp(item.id)}>Удалить</Button>
                         </div>
                     ))
                 )}
