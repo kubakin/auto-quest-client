@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Modal, Upload } from 'antd';
+import { Button, Card, Form, Input, InputNumber, Modal, Upload } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import API from '../../../__shared/api';
@@ -111,6 +111,13 @@ export const CreateUpdateTask: FC<{
                     initialValue={initState?.text || ''}
                 >
                     <Input/>
+                </Form.Item>
+                <Form.Item
+                    name={'default_order'}
+                    label={'Порядок'}
+                    initialValue={initState?.default_order || ''}
+                >
+                    <InputNumber/>
                 </Form.Item>
                 <Form.Item
                     name={'answer'}

@@ -25,6 +25,7 @@ export interface iTask {
   price: number;
   file: string;
   fileType: FileType;
+  default_order: number;
   helps: iHelp[]
 };
 
@@ -49,6 +50,7 @@ export interface iTeam {
   status: Status;
   score: number;
   currentTask: iTaskForTeam;
+  users: iUser[];
 };
 
 export interface iUser {

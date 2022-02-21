@@ -30,7 +30,6 @@ const TeamPage: FC<{game: iGameData}> = ({game}) => {
     };
     useEffect(()=>{
         const tick = setInterval(()=> {
-            console.log('tick');
             dispatch(meAsync());
         }, 3000)
         if (user.user?.team?.status === Status.ACTIVATED) {
@@ -69,6 +68,7 @@ const TeamPage: FC<{game: iGameData}> = ({game}) => {
                 {<Row className={styles.briefingLink}>
                     <Link to="/briefing">Перейти к брифингу</Link>
                 </Row>}
+                {user.user?.role === 'admin' && <Link to={'/admin/team'}>Admin</Link>}
                 {/*{user.user?.team?.status === Status.ACTIVATED && <Row className={styles.briefingLink}>*/}
                 {/*    <Link to="/briefing">Перейти к брифингу</Link>*/}
                 {/*</Row>}*/}

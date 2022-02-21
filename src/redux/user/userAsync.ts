@@ -35,7 +35,7 @@ export const meAsyncGlobal = (): any => {
 
 export const enterToTeamAsync = (name: string): any => {
     return (dispatch: any) => {
-        API.post('/user/team/enter', {name})
+        API.post('/user/team/enter', {name:name.trim().toLowerCase()})
             .then((data:AxiosResponse<iUser>) => dispatch(me(data.data)));
     };
 };
@@ -70,9 +70,9 @@ export const leaveTeamAsync = () => {
     };
 };
 
-export const createTeamAsync = (name: any): any => {
+export const createTeamAsync = (name: string): any => {
     return (dispatch: any) => {
-        API.post('/team', {name})
+        API.post('/team', {name:name.trim().toLowerCase()})
             .then(data => {
                 dispatch(me(data.data));
             });

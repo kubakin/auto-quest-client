@@ -2,15 +2,18 @@ import React, { FC, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import API from '../../../__shared/api';
 import moment from 'moment';
-import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Radio } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Radio, Row } from 'antd';
 import { StatusGame, StatusTeam } from '../../../__shared/enum';
+import UserList from '../components/user-list';
+import { iTeam } from '../../../__shared/types';
+import TaskItem from '../components/task-item';
 interface RouterParams {
     id: string;
 }
 const TeamInfo = () => {
     const routerParams = useParams<RouterParams>();
     const history = useHistory();
-    const [team, setTeam] = useState();
+    const [team, setTeam] = useState<iTeam>();
     useEffect(()=> {
             API.get(`/team/${routerParams.id}`)
                 .then(data => {
@@ -33,7 +36,7 @@ const TeamInfo = () => {
             })
     }
     return team ? (
-        <>
+        <div>
         <Form
             name="basic"
             labelCol={{span: 8}}
@@ -81,7 +84,13 @@ const TeamInfo = () => {
             <Button onClick={()=>onDelete()} className={'delete-admin'} type="primary">
                 Удалить
             </Button>
-        </>
+                <div>
+                    <UserList users={team.users}/>
+                </div>
+<div>
+    <TaskItem task={team?.currentTask?.task}/>
+</div>
+        </div>
     ) : <></>;
 };
 export default TeamInfo;

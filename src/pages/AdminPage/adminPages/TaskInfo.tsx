@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, InputNumber, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import API from '../../../__shared/api';
@@ -26,6 +26,7 @@ const TaskInfo = () => {
     const [taskInfo, setTaskInfo] = useState<iTask>();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalTaskVisible, setIsModalTaskVisible] = useState(false);
+    const [default_order, setDefault_order] = useState();
     const [text, setText] = useState('');
     const [price, setPrice] = useState('');
     const history = useHistory();
@@ -83,6 +84,14 @@ const TaskInfo = () => {
                     </div>
                     <p>
                         {taskInfo?.answer}
+                    </p>
+                </div>
+                <div className={styles.row}>
+                    <div>
+                        порядок:
+                    </div>
+                    <p>
+                        {taskInfo?.default_order}
                     </p>
                 </div>
                 <div className={styles.row}>

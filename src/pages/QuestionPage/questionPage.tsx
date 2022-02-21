@@ -39,7 +39,7 @@ const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) =
   }
 
   const toAnswer = () => {
-    dispatch(toAnswerAsync(answer))
+    dispatch(toAnswerAsync(answer.trim()))
     setAnswer('');
   }
 
@@ -93,7 +93,7 @@ const QuestionPage:FC<{user: iUserWithTeam, game: iGameData}> = ({user, game}) =
         <div >{task?.text}</div>
       </div>
       <Row className={styles.answerBottomBlock} justify="center">
-        <Col  span={12}><input placeholder='Введите ответ' type="text" value={answer} onChange={(e:ChangeEvent<HTMLInputElement>)=>setAnswer(e.target.value)} /></Col>
+        <Col  span={12}><input placeholder='Введите ответ' type="text" value={answer} onChange={(e:ChangeEvent<HTMLInputElement>)=>setAnswer(e.target.value.toLowerCase())} /></Col>
         <Col span={8}><Button onClick={()=>toAnswer()}>Отправить</Button></Col>
       </Row>
     </div>

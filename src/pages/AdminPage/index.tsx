@@ -43,6 +43,9 @@ const AdminPage: FC<{ user: iUser, game: iGameData, match: any }> = ({match, use
                         <Menu.Item key={match.path + '/game'} icon={<UploadOutlined/>}>
                             <Link to={baseAdminPath + '/game'}>Игра</Link>
                         </Menu.Item>
+                        <Menu.Item key={match.path + '/users'} icon={<UploadOutlined/>}>
+                            <Link to={baseAdminPath + '/users'}>Игроки</Link>
+                        </Menu.Item>
 
                     </Menu>
                 </Sider>
@@ -51,7 +54,7 @@ const AdminPage: FC<{ user: iUser, game: iGameData, match: any }> = ({match, use
                         className="site-layout-sub-header-background"
                         style={{padding: 0}}
                     />
-                    <Content className={styles.AdminContent} style={{margin: '24px 16px 0'}}>
+                    <Content className={styles.AdminContent} style={{margin: '24px 16px 0', width: '100%'}}>
                         <Switch>
                             <RoutesAdminList match={match} user={user} game={game}/>
                         </Switch>

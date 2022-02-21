@@ -81,9 +81,10 @@ const TeamRow: FC<{
     return (
         <Row className={'width100'}>
             <Col onClick={() => history.push(`/admin/team/${team.id}`)} span={6}>{team.name} </Col>
-            <Col span={6}><a href="" onClick={(e) => clickChatHandler(e, team)}>Начать чат</a></Col>
-            <Col span={6}>{team.status}</Col>
-            <Col span={6}><Button onClick={() => actionHandler(team.id)}>Activate</Button></Col>
+            <Col span={4}><a href="" onClick={(e) => clickChatHandler(e, team)}>Начать чат</a></Col>
+            <Col span={4}>{team.status}</Col>
+            <Col span={4}>{team.progress}</Col>
+            <Col span={4}><Button onClick={() => actionHandler(team.id)}>Activate</Button></Col>
         </Row>
     );
 };
